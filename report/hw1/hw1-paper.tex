@@ -1,6 +1,7 @@
 \documentclass[conference]{IEEEtran}
 \IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{caption}
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
@@ -9,6 +10,7 @@
 \usepackage{xcolor}
 % User packages
 \usepackage{hyperref}
+
 % \usepackage[brazilian]{babel}
 
 % Default arameters
@@ -29,12 +31,6 @@
 \textit{Universidade Federal do Ceará}\\
 Fortaleza, Brazil \\
 \href{mailto:brewtonlmorais@gmail.com}{brewtonlmorais@gmail.com}}
-\and
-\IEEEauthorblockN{Cléber Lucas}
-\IEEEauthorblockA{\textit{DETI} \\
-\textit{Universidade Federal do Ceará}\\
-Fortaleza, Brazil \\
-\href{mailto:seuemail@email.com}{seuemail@email.com} \reviewUrgent{Update}}
 \and
 \IEEEauthorblockN{Lucas Abdalah}
 \IEEEauthorblockA{\textit{DETI} \\
@@ -89,40 +85,103 @@ confirmed throughout the development of the study.
 
 
 
-\section{Ease of Use}
+\section{Breast Cancer Dataset}
 
-\subsection{Maintaining the Integrity of the Specifications}
+\subsection{Context and parameters}
 
-The IEEEtran class file is used to format your paper and style the text. All margins, 
-column widths, line spaces, and text fonts are prescribed; please do not 
-alter them. You may note peculiarities. For example, the head margin
-measures proportionately more than is customary. This measurement 
-and others are deliberate, using specifications that anticipate your paper 
-as one part of the entire proceedings, and not as an independent document. 
-Please do not revise any of the current designations.
+The breast cancer is characterized when the cells in the women's breast start
+growing uncontrollaby, which forms tumors that can be either bening or malign. 
 
-\section{Prepare Your Paper Before Styling}
-Before you begin to format your paper, first write and save the content as a 
-separate text file. Complete all content and organizational editing before 
-formatting. Please note sections \ref{AA}--\ref{SCM} below for more information on 
-proofreading, spelling and grammar.
+The dataset contains cell parameters such as radius mean, texture mean, area mean, 
+smoothness and so on, which are normally the parameters altered by a malignant
+tumor. 
+It is composed by 32 columns and 539 rows, that is, 32 features 
+for 539 samples. There are 2 columns between the 32 that do not represent any information 
+concerning the cells, but the identification of the pacients and their final
+diagnosis as well. Therefore, the dataset contains two classes, Malignant (M) and Benign (B),
+characterizing a binary classification problem. 
 
-Keep your text and graphic files separate until after the text has been 
-formatted and styled. Do not number text heads---{\LaTeX} will do that 
-for you.
+Although there are only two classes, the key challenge is to build a prediction
+model based on the weight of each feature on the final result, that is, the relevance
+on the final diagnosis. It's proposed a data investigation on the possible missing values as 
+well as a dimensionality reduction since there are too many columns, what would 
+make the model too complex and probably not able to generalize if all of these 
+features were to be considered for the model construction. 
 
-\subsection{Abbreviations and Acronyms}\label{AA}
-Define abbreviations and acronyms the first time they are used in the text, 
-even after they have been defined in the abstract. Abbreviations such as 
-IEEE, SI, MKS, CGS, ac, dc, and rms do not have to be defined. Do not use 
-abbreviations in the title or heads unless they are unavoidable.
+Throughout this work, the programming language \textit{\textbf{Python}} was employed using mainly the \textit{Pandas} library, which deals with data frame, including the preprocessing and cleaning steps, as well as the plots and inferences. 
 
-\subsection{Units}
+\section{Data Preprocessing}
+Before dealing with plots and inferences from the data, it is extremely important to perform a normalization in order to facilitate the visualization of the histograms and correlation plots. It is done by applying the z-score on the dataset.
+
+\subsection{Z-Score Normalization}
+
+Also called a standard score, the z-score is a normalization technique that gives the idea of how far from the mean a data point is. It can be placed on a \textit{normal distribution} curve. In order to do so, it is necessary to know the mean $\mu$ and the standard deviation $\sigma$ of the points.
+
+Let $\Bar{x}$ be the sample mean,
+$$\Bar{x} = \sum_i \frac{x_i}{N}$$
+then
+$$z_i = \cfrac{x_i - \Bar{x}}{\sigma}$$
+
+Therefore, since now the data is located around a zero mean normal distribution with unitary variance, the identification of outliers has became easier. 
+
+\subsection{Data review}\label{AA}
+It was check the existence of any missing values, but it was found that all data is fully completed, which eliminates the need of any data compesation technique.
+
+\subsection{Statistical Analysis}
 \begin{itemize}
-\item Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as ``3.5-inch disk drive''.
-\item Avoid combining SI and CGS units, such as current in amperes and magnetic field in oersteds. This often leads to confusion because equations do not balance dimensionally. If you must use mixed units, clearly state the units for each quantity that you use in an equation.
-\item Do not mix complete spellings and abbreviations of units: ``Wb/m\textsuperscript{2}'' or ``webers per square meter'', not ``webers/m\textsuperscript{2}''. Spell out units when they appear in text: ``. . . a few henries'', not ``. . . a few H''.
-\item Use a zero before decimal points: ``0.25'', not ``.25''. Use ``cm\textsuperscript{3}'', not ``cc''.)
+\item To get a general perspective of the dataset, using the method \textit{describe} from the Pandas library, the following table is a cutout of the entire table involving all parameters, here not shown in order to not difficult the comprehension: 
+
+\begin{table}[htbp]
+\caption{Data Statistics 3 predictors}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+
+\cline{2-4} 
+\textbf{Stats} & \textbf{\textit{radius mean}}& \textbf{\textit{texture mean}}& \textbf{\textit{perimeter mean}} \\
+\hline
+\textbf{\textit{count}}& 569 & 569 & 569  \\
+\hline
+\textbf{\textit{mean}}&  -1.256562 & 1.049736 & 1.272171 \\
+\hline
+\textbf{\textit{std}}& 1.000880 & 1.000880 & 1.000880 \\ 
+\hline
+\textbf{\textit{min}} &-2.029648  & -2.229249 & -1.984504 \\ 
+\hline
+\textbf{\textit{25\%}}& -6.893853 &-7.259631	& -6.919555 \\
+\hline
+\textbf{\textit{50\%}}& -2.150816 &-1.046362 & -2.359800 \\ 
+\hline
+\textbf{\textit{75\%}}& 4.693926	& 5.841756 &4.996769 \\ 
+\hline
+\textbf{\textit{max}}& 3.971288 & 4.651889 & 3.976130 \\ 
+\hline
+\end{tabular}
+\label{tab1}
+\end{center}
+\end{table}
+
+\item The following table shows the mean statistics of 3 predictors grouped by Diagnosis: malignant or benign.
+
+
+\begin{table}[htbp]
+\caption{Data Statistics grouped by diagnosis}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+
+\cline{2-4} 
+\textbf{Diagnosis} & \textbf{\textit{radius mean}}& \textbf{\textit{texture mean}}& \textbf{\textit{perimeter mean}} \\
+\hline
+\textbf{\textit{B}}& 1.097064 &-2.073335 &	1.269934  \\
+\hline
+\textbf{\textit{M}}& 1.829821 & -0.353632 & 1.685955 \\
+\hline
+\end{tabular}
+\label{tab1}
+\end{center}
+\end{table}
+
 \end{itemize}
 
 \subsection{Equations}
