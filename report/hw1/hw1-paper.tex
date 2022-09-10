@@ -78,9 +78,9 @@ with the goal of fiding a correlation or a probability relationship to the final
 build a probabilistic model capable of predicting the malignancy of tumor cells.
 
 Therefore this work focus on the search for linear relationship between the parameters 
-and the class of data, which it's refered as M for malignant and B for benign cells, wich can be 
+and the class of data, which it's refered as M for malignant and B for benign cells, wh ich can be 
 categorized as a binary classification problem. At first, it may be possible to use 
-Linear Regression techniques and Maximum Likelihood Estimator to achieve this goal, which will be 
+Linear Regression techniques and Maximum Likelihood Estimator to achieve this goal, to be 
 confirmed throughout the development of the study. 
 
 \section{Breast Cancer Dataset}
@@ -88,23 +88,22 @@ confirmed throughout the development of the study.
 \subsection{Context and parameters}
 
 The breast cancer is characterized when the cells in the women's breast start
-growing uncontrollaby, which forms tumors that can be either bening or malign. 
+growing uncontrollaby, forming tumors that can be either bening or malign. 
 
 The dataset contains cell parameters such as radius mean, texture mean, area mean, 
 smoothness and so on, which are normally the parameters altered by a malignant
 tumor. 
-It is composed by 32 columns and 539 rows, that is, 32 features 
-for 539 samples. There are 2 columns between the 32 that do not represent any information 
+It is composed by 32 columns and 569 rows, \textit{i.e}, 32 features 
+for 569 samples. There are 2 columns between the 32 that do not represent any information 
 concerning the cells, but the identification of the pacients and their final
-diagnosis as well. Therefore, the dataset contains two classes, Malignant (M) and Benign (B),
-characterizing a binary classification problem. 
+diagnosis as well. 
 
 Although there are only two classes, the key challenge is to build a prediction
 model based on the weight of each feature on the final result, that is, the relevance
 on the final diagnosis. It's proposed a data investigation on the possible missing values as 
-well as a dimensionality reduction since there are too many columns, what would 
-make the model too complex and probably not able to generalize if all of these 
-features were to be considered for the model construction. 
+well as a dimensionality reduction by performing a Principal Component Analysis (PCA), 
+since there are too many columns, what would make the model too complex and probably not able 
+to generalize if all of these features were to be considered for the model construction. 
 
 Throughout this work, the programming language \textit{\textbf{Python}} was employed 
 using mainly the \textit{Pandas} library, which deals with data frame, including the 
@@ -113,17 +112,20 @@ preprocessing and cleaning steps, as well as the plots and inferences.
 
 \subsection{Data set Variables}
 
-As it was previously stated, the data set contains 32 columns whose 30 of them correspond to the predictors. The following list corresponds to the set of all variables present in the data frame and its definition, with order of appearance. 
+As it was previously stated, the data set contains 32 columns whose 30 of them 
+correspond to the predictors. The following list corresponds to the set of all 
+variables present in the data frame and their definition, with order of appearance. 
 
 \begin{enumerate}
-     \item \textbf{\textit{id}} (primary key): identification of each patient, final target.
-     \item \textbf{\textit{diagnosis}} (M/B): sample class, it can be either \textbf{M} for Malignant, or \textbf{B} for Benign.
+     \item \textbf{\textit{id}} (primary key): identification of each patient.
+     \item \textbf{\textit{diagnosis}} (M/B): sample class, it can be either \textbf{M} for Malignant, 
+     or \textbf{B} for Benign. Final target.
      
      \item \textbf{\textit{radius mean}}: mean value of lobes' radius.
      \item \textbf{\textit{texture mean}}: mean value of surface texture.
      \item \textbf{\textit{perimeter mean}}: mean value of lobes' outer perimeter.
      \item \textbf{\textit{area mean}}: mean value of lobes' area.
-     \item \textbf{\textit{smoothness mean}}: mean value of smoothness level
+     \item \textbf{\textit{smoothness mean}}: mean value of smoothness level.
      
      \item \textbf{\textit{compactness mean}}: mean value of tumor cell compactness.
      \item \textbf{\textit{concavity mean}}: mean value of tumor cell concavity.
@@ -133,7 +135,7 @@ As it was previously stated, the data set contains 32 columns whose 30 of them c
      
      \item \textbf{\textit{radius se}}: error of radius.
      \item \textbf{\textit{texture se}}: error of texture.
-     \item \textbf{\textit{perimeter se}}: error perimeter.
+     \item \textbf{\textit{perimeter se}}: error of perimeter.
      \item \textbf{\textit{area se}}: error of area.
      \item \textbf{\textit{smoothness se}}: error of smoothness.
      \item \textbf{\textit{compactness se}}: error of compactness.
@@ -179,12 +181,13 @@ unitary variance, the identification of outliers has became easier.
 
 The need to perform such normalization is that a model constructed from a 
 non-normalized data set will probably have a biased result, since the model can be 
-sensitive to variance. Therefore, if there are large differences between the range of 
-some variables, those with the highest range will have more relevance to the model, 
-since the variance is larger, that is, it carries more information.
+sensitive to variance. Thus, in a non-normalized data set, if there are large 
+differences between the range of some variables, those with the highest range would have much
+more relevance to the model, since the variance is larger, that is, it carries more information.
 
 \subsection{Data review}\label{AA}
-It was check the existence of any missing values, but it was found that all data is fully completed, which eliminates the need of any data compesation technique.
+It was checked if there were any missing values, but it was found that all data is fully completed, 
+which eliminates the need of any data compensation technique.
 
 \subsection{Statistical Analysis}
 \begin{itemize}
