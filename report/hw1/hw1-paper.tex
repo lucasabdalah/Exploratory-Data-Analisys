@@ -110,6 +110,53 @@ Throughout this work, the programming language \textit{\textbf{Python}} was empl
 using mainly the \textit{Pandas} library, which deals with data frame, including the 
 preprocessing and cleaning steps, as well as the plots and inferences. 
 
+
+\subsection{Data set Variables}
+
+As it was previously stated, the data set contains 32 columns whose 30 of them correspond to the predictors. The following list corresponds to the set of all variables present in the data frame and its definition, with order of appearance. 
+
+\begin{enumerate}
+     \item \textbf{\textit{id}} (primary key): identification of each patient, final target.
+     \item \textbf{\textit{diagnosis}} (M/B): sample class, it can be either \textbf{M} for Malignant, or \textbf{B} for Benign.
+     
+     \item \textbf{\textit{radius mean}}: mean value of lobes' radius.
+     \item \textbf{\textit{texture mean}}: mean value of surface texture.
+     \item \textbf{\textit{perimeter mean}}: mean value of lobes' outer perimeter.
+     \item \textbf{\textit{area mean}}: mean value of lobes' area.
+     \item \textbf{\textit{smoothness mean}}: mean value of smoothness level
+     
+     \item \textbf{\textit{compactness mean}}: mean value of tumor cell compactness.
+     \item \textbf{\textit{concavity mean}}: mean value of tumor cell concavity.
+     \item \textbf{\textit{concave points mean}}: mean value of tumor cell concave points.
+     \item \textbf{\textit{symmetry mean}}: mean value of tumor cell symmetry.
+     \item \textbf{\textit{fractal dimension mean}}: mean value of tumor cell fractal dimension.
+     
+     \item \textbf{\textit{radius se}}: error of radius.
+     \item \textbf{\textit{texture se}}: error of texture.
+     \item \textbf{\textit{perimeter se}}: error perimeter.
+     \item \textbf{\textit{area se}}: error of area.
+     \item \textbf{\textit{smoothness se}}: error of smoothness.
+     \item \textbf{\textit{compactness se}}: error of compactness.
+     
+     \item \textbf{\textit{concavity se}}: error of concavity.
+     \item \textbf{\textit{concave points se}}: error of concave points.
+     \item \textbf{\textit{symmetry se}}: error of symmetry.
+     \item \textbf{\textit{fractal dimension se}}: error of fractal dimension.
+     
+     \item \textbf{\textit{radius worst}}: worst tumor cell radius value.
+     \item \textbf{\textit{texture worst}}: worst tumor cell texture value.
+     \item \textbf{\textit{perimeter worst}}: worst tumor cell perimeter value.
+     \item \textbf{\textit{area worst}}: worst tumor cell area value.
+     \item \textbf{\textit{smoothness worst}}: worst tumor cell smoothness value. 
+     \item \textbf{\textit{compactness worst}}: worst tumor cell compactness value.
+     
+     \item \textbf{\textit{concavity worst}}: worst tumor cell compactness value.
+     \item \textbf{\textit{concave points worst}}: worst concave points value.
+     \item \textbf{\textit{symmetry worst}}: worst tumor cell symmetry value.
+     \item \textbf{\textit{fractal dimension worst}}: worst tumor cell fractal value.
+     
+\end{enumerate}
+
 \section{Data Preprocessing}
 Before dealing with plots and inferences from the data, it is extremely important to 
 perform a normalization in order to facilitate the visualization of the histograms 
