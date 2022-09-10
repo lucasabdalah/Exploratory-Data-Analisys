@@ -108,21 +108,35 @@ well as a dimensionality reduction since there are too many columns, what would
 make the model too complex and probably not able to generalize if all of these 
 features were to be considered for the model construction. 
 
-Throughout this work, the programming language \textit{\textbf{Python}} was employed using mainly the \textit{Pandas} library, which deals with data frame, including the preprocessing and cleaning steps, as well as the plots and inferences. 
+Throughout this work, the programming language \textit{\textbf{Python}} was employed 
+using mainly the \textit{Pandas} library, which deals with data frame, including the 
+preprocessing and cleaning steps, as well as the plots and inferences. 
 
 \section{Data Preprocessing}
-Before dealing with plots and inferences from the data, it is extremely important to perform a normalization in order to facilitate the visualization of the histograms and correlation plots. It is done by applying the z-score on the dataset.
+Before dealing with plots and inferences from the data, it is extremely important to 
+perform a normalization in order to facilitate the visualization of the histograms 
+and correlation plots. It is done by applying the z-score on the dataset.
 
 \subsection{Z-Score Normalization}
 
-Also called a standard score, the z-score is a normalization technique that gives the idea of how far from the mean a data point is. It can be placed on a \textit{normal distribution} curve. In order to do so, it is necessary to know the mean $\mu$ and the standard deviation $\sigma$ of the points.
+Also called a standard score, the z-score is a normalization technique that gives the 
+idea of how far from the mean a data point is. It can be placed on a 
+\textit{normal distribution} curve. In order to do so, it is necessary to know the 
+mean $\mu$ and the standard deviation $\sigma$ of the points.
 
 Let $\Bar{x}$ be the sample mean,
 $$\Bar{x} = \sum_i \frac{x_i}{N}$$
 then
 $$z_i = \cfrac{x_i - \Bar{x}}{\sigma}$$
 
-Therefore, since now the data is located around a zero mean normal distribution with unitary variance, the identification of outliers has became easier. 
+Therefore, since now the data is located around a zero mean normal distribution with 
+unitary variance, the identification of outliers has became easier.
+
+The need to perform such normalization is that a model constructed from a 
+non-normalized data set will probably have a biased result, since the model can be 
+sensitive to variance. Therefore, if there are large differences between the range of 
+some variables, those with the highest range will have more relevance to the model, 
+since the variance is larger, that is, it carries more information.
 
 \subsection{Data review}\label{AA}
 It was check the existence of any missing values, but it was found that all data is fully completed, which eliminates the need of any data compesation technique.
