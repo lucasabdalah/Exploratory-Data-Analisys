@@ -320,6 +320,15 @@ contain more information. Mathematically, once the eigenvectors are ordered
 according to their eigenvalues, the rank of principal components in significance is 
 found as well.
 
+Finally, from the eigenvectors a feature vector is created containing all of these 
+eigenvectors or just some of them, after judging if some component is necessary or 
+not, when they have less significance. So far, no data transformation was done apart 
+from the normalization, so it's now necessary to recast the data along the principal 
+component axes, which is done so by using the feature vector on the standardized 
+data points in order to perform a reorientation.
+
+$$FinalDataset = FeatureVector^{T} * StandardizedDataset^{T}$$
+
 \section{Experimental Results}
 \reviewUrgent{Describe our statistic results and figures.}
 
