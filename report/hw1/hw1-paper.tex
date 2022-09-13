@@ -9,6 +9,7 @@
 \usepackage{xcolor}
 % User packages
 \usepackage{hyperref}
+% \usepackage[brazilian]{babel}
 
 % Default arameters
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
@@ -27,9 +28,9 @@
 \IEEEauthorblockA{\textit{DETI} \\
 \textit{Universidade Federal do Ceará}\\
 Fortaleza, Brazil \\
-\href{mailto:seuemail@email.com}{seuemail@email.com} \reviewUrgent{Update}}
+\href{mailto:brewtonlmorais@gmail.com}{brewtonlmorais@gmail.com}}
 \and
-\IEEEauthorblockN{Cléber Lucas }
+\IEEEauthorblockN{Cléber Lucas}
 \IEEEauthorblockA{\textit{DETI} \\
 \textit{Universidade Federal do Ceará}\\
 Fortaleza, Brazil \\
@@ -51,19 +52,42 @@ or Math in Paper Title or Abstract.
 \end{abstract}
 
 \begin{IEEEkeywords}
-component, formatting, style, styling, insert
+breast cancer, diagnosis, machine learning, linear model, linear regression, cell biopsy
 \end{IEEEkeywords}
 
 \section{Introduction}
 
-\reviewUrgent{This command is used for mandatory changes. This command is used for mandatory changes. This command is used for mandatory changes. This command is used for mandatory changes. This command is used for mandatory changes. This command is used for mandatory changes.}
+
 
 \reviewNormal{This command is used for a strong suggestion.}
 
 \reviewMinor{This command is used for minor changes suggestion.}
 
-This document is a model and instructions for \LaTeX.
-Please observe the conference page limits. 
+Breast Cancer is one of the most commom cancer type in women behind only of Skin Cancer. In Brazil, according to 
+the Instituto Nacional de Câncer (INCA) \reviewMinor{translate to English?}, approximately 59,700 women were diagnosed
+with Breast Cancer in 2019, with a mortality rate of 13.68 per 100,000 habitants. 
+Despite the fact that there are a limited amount of data worlwide, in some regions such as Western Europe and North America,
+breast cancer is the one with the highest incidence.
+
+Although the treatment for it is normally agressive, early-stage cancer detection may reduce the death rate in the long term \cite{b1}. 
+Some exams such as mammography and contrast-enhaced (CE) digital mammography are commonly used to do the diagnosis, 
+as well as the breast biopses aims to infer if the tumor is malignant or benign, requiring trained people. 
+
+With the purpose of improving Breast Cancer Diagnosis, the analysis of potential cancerous cells have been made,
+retrieving features such as texture, smoothness, radius size, etc. The study of these parameters can be crucial 
+to the early-stage breast cancer detection, as it will be investigated in this work. 
+
+Throughtout this paper, the relevance of such cell caracteristics will be analyzed by statitics metrics and data visualization tools 
+with the goal of fiding a correlation or a probability relationship to the final diagnosis. The final goal is to 
+build a probabilistic model capable of predicting the malignancy of tumor cells.
+
+Therefore this work focus on the search for linear relationship between the parameters 
+and the class of data, which it's refered as M for malignant and B for benign cells, wich can be 
+categorized as a binary classification problem. At first, it may be possible to use 
+Linear Regression techniques and Maximum Likelihood Estimator to achieve this goal, which will be 
+confirmed throughout the development of the study. 
+
+
 
 \section{Ease of Use}
 
