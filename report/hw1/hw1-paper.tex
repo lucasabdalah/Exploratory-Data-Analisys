@@ -10,6 +10,12 @@
 \usepackage{xcolor}
 % User packages
 \usepackage{hyperref}
+\usepackage{makecell}
+
+\renewcommand\theadalign{bc}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
 
 % \usepackage[brazilian]{babel}
 
@@ -53,21 +59,12 @@ breast cancer, diagnosis, machine learning, linear model, linear regression, cel
 
 \section{Introduction}
 
-
-
-\reviewNormal{This command is used for a strong suggestion.}
-
-\reviewMinor{This command is used for minor changes suggestion.}
-
-Breast Cancer is one of the most commom cancer type in women behind only of Skin Cancer. In Brazil, according to 
-the Instituto Nacional de Câncer (INCA), approximately 59,700 women were diagnosed
-with Breast Cancer in 2019, with a mortality rate of 13.68 per 100,000 habitants. 
+Breast Cancer is one of the most commom cancer type in women behind only of Skin Cancer. In Brazil, according to the Instituto Nacional de Câncer (INCA), approximately 59,700 women were diagnosed with Breast Cancer in 2019, with a mortality rate of 13.68 per 100,000 habitants. 
 Despite the fact that there are a limited amount of data worlwide, in some regions such as Western Europe and North America,
 breast cancer is the one with the highest incidence.
 
-Although the treatment for it is normally agressive, early-stage cancer detection may reduce the death rate in the long term \cite{b1}. 
-Some exams such as mammography and contrast-enhaced (CE) digital mammography are commonly used to do the diagnosis, 
-as well as the breast biopses aims to infer if the tumor is malignant or benign, requiring trained people. 
+Although the treatment for it is normally agressive, early-stage cancer detection may reduce the death rate in the long term~\cite{b1}. 
+Some exams such as mammography and contrast-enhaced (CE) digital mammography are commonly used to do the diagnosis, as well as the breast biopses aims to infer if the tumor is malignant or benign, requiring trained people. 
 
 With the purpose of improving Breast Cancer Diagnosis, the analysis of potential cancerous cells have been made,
 retrieving features such as texture, smoothness, radius size, etc. The study of these parameters can be crucial 
@@ -81,7 +78,14 @@ Therefore this work focus on the search for linear relationship between the para
 and the class of data, which it's refered as M for malignant and B for benign cells, wh ich can be 
 categorized as a binary classification problem. At first, it may be possible to use 
 Linear Regression techniques and Maximum Likelihood Estimator to achieve this goal, to be 
-confirmed throughout the development of the study. 
+confirmed throughout the development of the study.
+
+Feature Extraction and Dimensionality reduction \cite{Street1993}, 
+Clustering and Class Separation \cite{Mangasarian1995}, \cite{Bennett1992}.
+All the works aim to increase accuracy in breast cancer diagnosis.
+\cite{Wolberg1994}.
+\reviewUrgent{ORGANIZAR ISSO NA INTRO.}
+
 
 \section{Methods}
 
@@ -116,48 +120,86 @@ As it was previously stated, the data set contains 32 columns whose 30 of them
 correspond to the predictors. The following list corresponds to the set of all 
 variables present in the data frame and their definition, with order of appearance. 
 
-\begin{enumerate}
-     \item \textbf{\textit{id}} (primary key): identification of each patient.
-     \item \textbf{\textit{diagnosis}} (M/B): sample class, it can be either \textbf{M} for Malignant, 
-     or \textbf{B} for Benign. Final target.
-     
-     \item \textbf{\textit{radius mean}}: mean value of lobes' radius.
-     \item \textbf{\textit{texture mean}}: mean value of surface texture.
-     \item \textbf{\textit{perimeter mean}}: mean value of lobes' outer perimeter.
-     \item \textbf{\textit{area mean}}: mean value of lobes' area.
-     \item \textbf{\textit{smoothness mean}}: mean value of smoothness level.
-     
-     \item \textbf{\textit{compactness mean}}: mean value of tumor cell compactness.
-     \item \textbf{\textit{concavity mean}}: mean value of tumor cell concavity.
-     \item \textbf{\textit{concave points mean}}: mean value of tumor cell concave points.
-     \item \textbf{\textit{symmetry mean}}: mean value of tumor cell symmetry.
-     \item \textbf{\textit{fractal dimension mean}}: mean value of tumor cell fractal dimension.
-     
-     \item \textbf{\textit{radius se}}: error of radius.
-     \item \textbf{\textit{texture se}}: error of texture.
-     \item \textbf{\textit{perimeter se}}: error of perimeter.
-     \item \textbf{\textit{area se}}: error of area.
-     \item \textbf{\textit{smoothness se}}: error of smoothness.
-     \item \textbf{\textit{compactness se}}: error of compactness.
-     
-     \item \textbf{\textit{concavity se}}: error of concavity.
-     \item \textbf{\textit{concave points se}}: error of concave points.
-     \item \textbf{\textit{symmetry se}}: error of symmetry.
-     \item \textbf{\textit{fractal dimension se}}: error of fractal dimension.
-     
-     \item \textbf{\textit{radius worst}}: worst tumor cell radius value.
-     \item \textbf{\textit{texture worst}}: worst tumor cell texture value.
-     \item \textbf{\textit{perimeter worst}}: worst tumor cell perimeter value.
-     \item \textbf{\textit{area worst}}: worst tumor cell area value.
-     \item \textbf{\textit{smoothness worst}}: worst tumor cell smoothness value. 
-     \item \textbf{\textit{compactness worst}}: worst tumor cell compactness value.
-     
-     \item \textbf{\textit{concavity worst}}: worst tumor cell compactness value.
-     \item \textbf{\textit{concave points worst}}: worst concave points value.
-     \item \textbf{\textit{symmetry worst}}: worst tumor cell symmetry value.
-     \item \textbf{\textit{fractal dimension worst}}: worst tumor cell fractal value.
-     
-\end{enumerate}
+The diagnosis predictor is the categorical variable, which it can be either \textbf{M} for Malignant, or \textbf{B} for Benign. 
+\reviewUrgent{ACHAR UM LOCAL NO TEXTO PRA ENCAIXAR ESSE TRECHO}
+
+\begin{table}[htbp]
+\caption{Summary of Predictors Information.}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+    \hline
+    \cline{2-3} 
+    Tag & Description & Units \\
+    \hline
+    id & Patient identification & - \\
+    \hline
+    Diagnosis & Sample class & - \\
+    \hline
+    Radius Mean & \makecell{Mean value of \\ lobes' radius} &  \\
+    \hline
+    Texture Mean & \makecell{Mean value of \\ surface texture} &  \\
+    \hline
+    Perimeter Mean & \makecell{Mean value of lobes' \\ outer perimeter}  &  \\
+    \hline
+    Area Mean & \makecell{Mean value of \\ lobes' area} &  \\
+    \hline
+    Smoothness Mean & \makecell{Mean value of \\ smoothness level} &  \\
+    \hline
+    Compactness Mean & \makecell{Mean value of \\ tumor cell compactness} &  \\
+    \hline
+    Concavity Mean & \makecell{Mean value of tumor \\ cell concavity} &  \\
+    \hline
+    Concave Points Mean &  \makecell{Mean value of tumor\\ cell concave points} &  \\
+    \hline
+    Symmetry Mean & \makecell{Mean value of tumor\\ cell symmetry} &  \\
+    \hline
+    \makecell{Fractal \\ Dimension Mean} & \makecell{Mean value of tumor \\ cell fractal dimension} &  \\
+    \hline
+    Radius SE & Error of radius &  \\
+    \hline
+    Texture SE & Error of texture &  \\
+    \hline
+    Perimeter SE & Error of perimeter. &  \\
+    \hline
+    Area SE & Error of area &  \\
+    \hline
+    Smoothness SE & Error of smoothness &  \\
+    \hline
+    Compactness SE & Error of compactness &  \\
+    \hline
+    Concavity SE & Error of concavity &  \\
+    \hline
+    Concave Points SE & Error of concave points &  \\
+    \hline
+    Symmetry SE & Error of symmetry &  \\
+    \hline
+    Fractal Dimension SE & Error of fractal dimension &  \\
+    \hline
+    Radius Worst & Worst tumor cell radius value &  \\
+    \hline
+    Texture Worst & Worst tumor cell texture value &  \\
+    \hline
+    Perimeter Worst &  Worst tumor cell perimeter value&  \\
+    \hline
+    Area Worst &  Worst tumor cell area value &  \\
+    \hline
+    Smoothness Worst & Worst tumor cell smoothness value &  \\
+    \hline
+    Compactness Worst &  Worst tumor cell compactness value &  \\
+    \hline
+    Concavity Worst & Worst tumor cell compactness value &  \\
+    \hline
+    \makecell{Concave \\ Points Worst} & Worst concave points value &  \\
+    \hline
+    Symmetry Worst & Worst tumor cell symmetry value &  \\
+    \hline
+    \makecell{Fractal \\ Dimension Worst} & Worst tumor cell fractal value &  \\
+    \hline
+\end{tabular}
+\label{tab:Summary}
+\end{center}
+\end{table}
+
 
 \section{Data Preprocessing}
 Before dealing with plots and inferences from the data, it is extremely important to 
@@ -200,27 +242,26 @@ However, the first column containing the \textit{id} of the patients is not rele
 \caption{Data Statistics 3 predictors}
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
-\hline
-
-\cline{2-4} 
-\textbf{Stats} & \textbf{\textit{radius mean}}& \textbf{\textit{texture mean}}& \textbf{\textit{perimeter mean}} \\
-\hline
-\textbf{\textit{count}}& 569 & 569 & 569  \\
-\hline
-\textbf{\textit{mean}}&  -1.256562 & 1.049736 & 1.272171 \\
-\hline
-\textbf{\textit{std}}& 1.000880 & 1.000880 & 1.000880 \\ 
-\hline
-\textbf{\textit{min}} &-2.029648  & -2.229249 & -1.984504 \\ 
-\hline
-\textbf{\textit{25\%}}& -6.893853 &-7.259631	& -6.919555 \\
-\hline
-\textbf{\textit{50\%}}& -2.150816 &-1.046362 & -2.359800 \\ 
-\hline
-\textbf{\textit{75\%}}& 4.693926	& 5.841756 &4.996769 \\ 
-\hline
-\textbf{\textit{max}}& 3.971288 & 4.651889 & 3.976130 \\ 
-\hline
+    \hline
+    \cline{2-4} 
+    \textbf{Stats} & \textbf{\textit{radius mean}}& \textbf{\textit{texture mean}}& \textbf{\textit{perimeter mean}} \\
+    \hline
+    \textbf{\textit{count}}& 569 & 569 & 569  \\
+    \hline
+    \textbf{\textit{mean}}&  -1.256562 & 1.049736 & 1.272171 \\
+    \hline
+    \textbf{\textit{std}}& 1.000880 & 1.000880 & 1.000880 \\ 
+    \hline
+    \textbf{\textit{min}} &-2.029648  & -2.229249 & -1.984504 \\ 
+    \hline
+    \textbf{\textit{25\%}}& -6.893853 &-7.259631	& -6.919555 \\
+    \hline
+    \textbf{\textit{50\%}}& -2.150816 &-1.046362 & -2.359800 \\ 
+    \hline
+    \textbf{\textit{75\%}}& 4.693926	& 5.841756 &4.996769 \\ 
+    \hline
+    \textbf{\textit{max}}& 3.971288 & 4.651889 & 3.976130 \\ 
+    \hline
 \end{tabular}
 \label{tab1}
 \end{center}
@@ -252,11 +293,11 @@ Diagnosis: malignant or benign.
 
 The following image shows the conditional histograms of the data:
 
-\begin{figure}[h!]
-% \centerline{\includegraphics[width=1\columnwidth]{conditional_histogram.png}}
-\caption{Conditional Histograms.}
-\label{fig}
-\end{figure}
+\begin{figure*}[htpb!]
+    \centerline{\includegraphics[width=1.2 \textwidth]{../../code/hw1/figures/3-1-conditional-histogram.pdf}}
+    \caption{Conditional Histogram.}
+    \label{fig:3-1-conditional-histogram}
+\end{figure*}
 
 As it's possible to see, the majority of variables present normal and exponential 
 distribution. For the most part of the worst values for all the variables, it's not 
@@ -274,7 +315,36 @@ smoothness and compactness.
 The linear relantionship between these predictors will be analysed using the pair 
 plot soon.
 
-\section{Principal Component Analysis (PCA)}
+
+
+The figure~\ref{fig:3-1-conditional-histogram} shows that some predictors show very distinct distribution. \reviewUrgent{Cite which predictors has very similar distributions, and how many have very different histogram.}
+
+\clearpage
+
+
+\subsection{Predictors Relationship and Dimensionality reduction}
+
+- 21 pairs presents a correlation coefficients $|p| > 0.9$. 
+- 15 pairs presents a correlation coefficients $|p| > 0.95$.
+What
+
+\begin{figure}[htbp!]
+    \centerline{\includegraphics[width=0.5 \textwidth]{../../code/hw1/figures/4-3-correlation.pdf}}
+    \caption{Correlation Matrix presented as a Heatmap.}
+    \label{fig:4-3-correlation}
+\end{figure}
+
+\begin{figure*}[htbp!]
+    \centerline{\includegraphics[width=0.5 \textwidth]{../../code/hw1/figures/4-1-scatter-plot-clip.png}}
+    \caption{Scatter Plot.}
+    \label{fig:4-1-scatter-plot}
+\end{figure*}
+
+\clearpage
+
+\subsection{Principal Component Analysis (PCA)}
+
+\cite{James2013, Ringner2001, Hastie2009, Kuhn2013}
 
 Principal Component Analysis (PCA) is a dimensionality reduction techninque that works by transforming a large set of variables into a smaller one that aims to represent as much as possible it's done by all the data variables. The justification for its implementation is that, at most part of the cases, it is worth losing a little accuracy in order to make a smaller data set. Besides, with a more compact data frame, it's less expansive to construct a machine learning model, because it'll work faster and the analysis will be easier. Thus, the goal is to preserve as much information as possible even after having performed the dimensionality-reduction.
 
@@ -300,7 +370,7 @@ implies the decrease of the other.
 
 The next stage is to compute the eigenvectors and its eigenvalues of the covariance 
 matrix in order to identify the principal components. But first, the definition of 
-Principal Components \cite{Ringner}: principal components are directions along which 
+Principal Components~\cite{Ringner2001}: principal components are directions along which 
 the variance of the data reaches its maximal value. They are linear combinations of 
 the initial variables, related in such a way that the new variables are uncorrelated 
 
@@ -332,6 +402,26 @@ $$FinalDataset = FeatureVector^{T} * StandardizedDataset^{T}$$
 \section{Experimental Results}
 \reviewUrgent{Describe our statistic results and figures.}
 
+\begin{figure}[htbp]
+    \centerline{\includegraphics[width=0.5 \textwidth]{../../code/hw1/figures/5-1-PCA-10PC-variance.pdf}}
+    \caption{Normalized Bar plot.}
+    \label{fig:5-1-PCA-10PC-variance}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centerline{\includegraphics[width=0.5 \textwidth]{../../code/hw1/figures/5-2-PCA-2D-scatter.pdf}}
+    \caption{Data scatter plot on the two principal components domain.}
+    \label{fig:5-2-PCA-2D-scatter}
+\end{figure}
+
+
+\begin{figure}[htbp]
+    \centerline{\includegraphics[width=0.5 \textwidth]{../../code/hw1/figures/5-2-PCA-2D-loading.pdf}}
+    \caption{PCA loading with two principal components.}
+    \label{fig:5-2-PCA-2D-loading}
+\end{figure}
+
+
 
 \section{Discussion}
 \reviewUrgent{Further description about our results and what it implies.}
@@ -341,180 +431,16 @@ $$FinalDataset = FeatureVector^{T} * StandardizedDataset^{T}$$
 \reviewUrgent{Quick recap about what we did, reinforce our results strengths and weakness.}
 
 \section{Further Work}
+\reviewNormal{This command is used for a strong suggestion.}
+
+\reviewMinor{This command is used for minor changes suggestion.}
+
 \reviewUrgent{Quick recap about our work weakness and propose new approach to overcome its weakness.}
 
-
-% \subsection{Equations}
-% Number equations consecutively. To make your 
-% equations more compact, you may use the solidus (~/~), the exp function, or 
-% appropriate exponents. Italicize Roman symbols for quantities and variables, 
-% but not Greek symbols. Use a long dash rather than a hyphen for a minus 
-% sign. Punctuate equations with commas or periods when they are part of a 
-% sentence, as in:
-% \begin{equation}
-% a+b=\gamma\label{eq}
-% \end{equation}
-
-% Be sure that the 
-% symbols in your equation have been defined before or immediately following 
-% the equation. Use ``\eqref{eq}'', not ``Eq.~\eqref{eq}'' or ``equation \eqref{eq}'', except at 
-% the beginning of a sentence: ``Equation \eqref{eq} is . . .''
-
-% \subsection{\LaTeX-Specific Advice}
-
-% Please use ``soft'' (e.g., \verb|\eqref{Eq}|) cross references instead
-% of ``hard'' references (e.g., \verb|(1)|). That will make it possible
-% to combine sections, add equations, or change the order of figures or
-% citations without having to go through the file line by line.
-
-% Please don't use the \verb|{eqnarray}| equation environment. Use
-% \verb|{align}| or \verb|{IEEEeqnarray}| instead. The \verb|{eqnarray}|
-% environment leaves unsightly spaces around relation symbols.
-
-% Please note that the \verb|{subequations}| environment in {\LaTeX}
-% will increment the main equation counter even when there are no
-% equation numbers displayed. If you forget that, you might write an
-% article in which the equation numbers skip from (17) to (20), causing
-% the copy editors to wonder if you've discovered a new method of
-% counting.
-
-% {\BibTeX} does not work by magic. It doesn't get the bibliographic
-% data from thin air but from .bib files. If you use {\BibTeX} to produce a
-% bibliography you must send the .bib files. 
-
-% {\LaTeX} can't read your mind. If you assign the same label to a
-% subsubsection and a table, you might find that Table I has been cross
-% referenced as Table IV-B3. 
-
-% {\LaTeX} does not have precognitive abilities. If you put a
-% \verb|\label| command before the command that updates the counter it's
-% supposed to be using, the label will pick up the last counter to be
-% cross referenced instead. In particular, a \verb|\label| command
-% should not go before the caption of a figure or a table.
-
-% Do not use \verb|\nonumber| inside the \verb|{array}| environment. It
-% will not stop equation numbers inside \verb|{array}| (there won't be
-% any anyway) and it might stop a wanted equation number in the
-% surrounding equation.
-
-% \subsection{Some Common Mistakes}\label{SCM}
-% \begin{itemize}
-% \item The word ``data'' is plural, not singular.
-% \item The subscript for the permeability of vacuum $\mu_{0}$, and other common scientific constants, is zero with subscript formatting, not a lowercase letter ``o''.
-% \item In American English, commas, semicolons, periods, question and exclamation marks are located within quotation marks only when a complete thought or name is cited, such as a title or full quotation. When quotation marks are used, instead of a bold or italic typeface, to highlight a word or phrase, punctuation should appear outside of the quotation marks. A parenthetical phrase or statement at the end of a sentence is punctuated outside of the closing parenthesis (like this). (A parenthetical sentence is punctuated within the parentheses.)
-% \item A graph within a graph is an ``inset'', not an ``insert''. The word alternatively is preferred to the word ``alternately'' (unless you really mean something that alternates).
-% \item Do not use the word ``essentially'' to mean ``approximately'' or ``effectively''.
-% \item In your paper title, if the words ``that uses'' can accurately replace the word ``using'', capitalize the ``u''; if not, keep using lower-cased.
-% \item Be aware of the different meanings of the homophones ``affect'' and ``effect'', ``complement'' and ``compliment'', ``discreet'' and ``discrete'', ``principal'' and ``principle''.
-% \item Do not confuse ``imply'' and ``infer''.
-% \item The prefix ``non'' is not a word; it should be joined to the word it modifies, usually without a hyphen.
-% \item There is no period after the ``et'' in the Latin abbreviation ``et al.''.
-% \item The abbreviation ``i.e.'' means ``that is'', and the abbreviation ``e.g.'' means ``for example''.
-% \end{itemize}
-% An excellent style manual for science writers is \cite{b6}.
-
-% \subsection{Authors and Affiliations}
-% \textbf{The class file is designed for, but not limited to, six authors.} A 
-% minimum of one author is required for all conference articles. Author names 
-% should be listed starting from left to right and then moving down to the 
-% next line. This is the author sequence that will be used in future citations 
-% and by indexing services. Names should not be listed in columns nor group by 
-% affiliation. Please keep your affiliations as succinct as possible (for 
-% example, do not differentiate among departments of the same organization).
-
-% \subsection{Identify the Headings}
-% Headings, or heads, are organizational devices that guide the reader through 
-% your paper. There are two types: component heads and text heads.
-
-% Component heads identify the different components of your paper and are not 
-% topically subordinate to each other. Examples include Acknowledgments and 
-% References and, for these, the correct style to use is ``Heading 5''. Use 
-% ``figure caption'' for your Figure captions, and ``table head'' for your 
-% table title. Run-in heads, such as ``Abstract'', will require you to apply a 
-% style (in this case, italic) in addition to the style provided by the drop 
-% down menu to differentiate the head from the text.
-
-% Text heads organize the topics on a relational, hierarchical basis. For 
-% example, the paper title is the primary text head because all subsequent 
-% material relates and elaborates on this one topic. If there are two or more 
-% sub-topics, the next level head (uppercase Roman numerals) should be used 
-% and, conversely, if there are not at least two sub-topics, then no subheads 
-% should be introduced.
-
-% \subsection{Figures and Tables}
-% \paragraph{Positioning Figures and Tables} Place figures and tables at the top and 
-% bottom of columns. Avoid placing them in the middle of columns. Large 
-% figures and tables may span across both columns. Figure captions should be 
-% below the figures; table heads should appear above the tables. Insert 
-% figures and tables after they are cited in the text. Use the abbreviation 
-% ``Fig.~\ref{fig}'', even at the beginning of a sentence.
-
-% \begin{table}[htbp]
-% \caption{Table Type Styles}
-% \begin{center}
-% \begin{tabular}{|c|c|c|c|}
-% \hline
-% \textbf{Table}&\multicolumn{3}{|c|}{\textbf{Table Column Head}} \\
-% \cline{2-4} 
-% \textbf{Head} & \textbf{\textit{Table column subhead}}& \textbf{\textit{Subhead}}& \textbf{\textit{Subhead}} \\
-% \hline
-% copy& More table copy$^{\mathrm{a}}$& &  \\
-% \hline
-% \multicolumn{4}{l}{$^{\mathrm{a}}$Sample of a Table footnote.}
-% \end{tabular}
-% \label{tab1}
-% \end{center}
-% \end{table}
-
-% \begin{figure}[htbp]
-% \centerline{\includegraphics{fig1.png}}
-% \caption{Example of a figure caption.}
-% \label{fig}
-% \end{figure}
-
-% Figure Labels: Use 8 point Times New Roman for Figure labels. Use words 
-% rather than symbols or abbreviations when writing Figure axis labels to 
-% avoid confusing the reader. As an example, write the quantity 
-% ``Magnetization'', or ``Magnetization, M'', not just ``M''. If including 
-% units in the label, present them within parentheses. Do not label axes only 
-% with units. In the example, write ``Magnetization (A/m)'' or ``Magnetization 
-% \{A[m(1)]\}'', not just ``A/m''. Do not label axes with a ratio of 
-% quantities and units. For example, write ``Temperature (K)'', not 
-% ``Temperature/K''.
-
-% \section*{Acknowledgment}
-
-% The preferred spelling of the word ``acknowledgment'' in America is without 
-% an ``e'' after the ``g''. Avoid the stilted expression ``one of us (R. B. 
-% G.) thanks $\ldots$''. Instead, try ``R. B. G. thanks$\ldots$''. Put sponsor 
-% acknowledgments in the unnumbered footnote on the first page.
-
-% \section*{References}
-
-% Please number citations consecutively within brackets \cite{b1}. The 
-% sentence punctuation follows the bracket \cite{b2}. Refer simply to the reference 
-% number, as in \cite{b3}---do not use ``Ref. \cite{b3}'' or ``reference \cite{b3}'' except at 
-% the beginning of a sentence: ``Reference \cite{b3} was the first $\ldots$''
-
-% Number footnotes separately in superscripts. Place the actual footnote at 
-% the bottom of the column in which it was cited. Do not put footnotes in the 
-% abstract or reference list. Use letters for table footnotes.
-
-% Unless there are six authors or more give all authors' names; do not use 
-% ``et al.''. Papers that have not been published, even if they have been 
-% submitted for publication, should be cited as ``unpublished'' \cite{b4}. Papers 
-% that have been accepted for publication should be cited as ``in press'' \cite{b5}. 
-% Capitalize only the first word in a paper title, except for proper nouns and 
-% element symbols.
-
-% For papers published in translation journals, please give the English 
-% citation first, followed by the original foreign-language citation \cite{b6}.
+\clearpage
 
 \bibliographystyle{ieeetran}
 \bibliography{refs}
 
-% \vspace{12pt}
-% \color{red}
-% IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
 
 \end{document}
