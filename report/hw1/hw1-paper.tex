@@ -30,7 +30,7 @@
 
 \begin{document}
 
-\title{Conference Paper Title}
+\title{Dimensionality Reduction Analysis Applied to Breast Cancer Data}
 
 \author{\IEEEauthorblockN{Brewton Morais}
 \IEEEauthorblockA{\textit{DETI} \\
@@ -48,16 +48,20 @@ Fortaleza, Brazil \\
 \maketitle
 
 \begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
+Breast Cancer is one of the most aggressive cancer types and has a great impact in cancer mortality, mainly in women. This work analyzes tumor cells characteristics in order to provide an effective method to preprocess and reduce the dimension of the data. The presence of several predictors may provide meaningless or redundant information, what increase the cost of a Machine Learning-based techniques. In this paper, we present a framework based in Principal Component Analysis (PCA) and data normalization to clean the data and extract only the more relevant parameters.
+
+% This document is a model and instructions for \LaTeX.
+% This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
+% or Math in Paper Title or Abstract.
 \end{abstract}
 
 \begin{IEEEkeywords}
-breast cancer, diagnosis, machine learning, linear model, linear regression, cell biopsy
+Breast Cancer, Dimensionality Reduction, Linear regression, Machine learning, Principal Component Analysis.
 \end{IEEEkeywords}
 
 \section{Introduction}
+
+\cite{Kuhn2013}, \cite{Hastie2009}, \cite{Street1993}, \cite{Abdi2010}.
 
 Breast Cancer is one of the most commom cancer type in women behind only of Skin Cancer. In Brazil, according to the Instituto Nacional de Câncer (INCA), approximately 59,700 women were diagnosed with Breast Cancer in 2019, with a mortality rate of 13.68 per 100,000 habitants. 
 Despite the fact that there are a limited amount of data worlwide, in some regions such as Western Europe and North America,
@@ -334,11 +338,11 @@ What
     \label{fig:4-3-correlation}
 \end{figure}
 
-\begin{figure*}[htbp!]
+\begin{figure}[htbp!]
     \centerline{\includegraphics[width=0.5 \textwidth]{../../code/hw1/figures/4-1-scatter-plot-clip.png}}
     \caption{Scatter Plot.}
     \label{fig:4-1-scatter-plot}
-\end{figure*}
+\end{figure}
 
 \clearpage
 
@@ -437,7 +441,7 @@ $$FinalDataset = FeatureVector^{T} * StandardizedDataset^{T}$$
 
 \reviewUrgent{Quick recap about our work weakness and propose new approach to overcome its weakness.}
 
-\clearpage
+% \clearpage
 
 \bibliographystyle{ieeetran}
 \bibliography{refs}
