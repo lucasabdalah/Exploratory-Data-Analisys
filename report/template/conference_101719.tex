@@ -89,17 +89,29 @@ confirmed throughout the development of the study.
 
 
 
-\section{Ease of Use}
+\section{Breast Cancer Dataset}
 
-\subsection{Maintaining the Integrity of the Specifications}
+\subsection{Context and parameters}
 
-The IEEEtran class file is used to format your paper and style the text. All margins, 
-column widths, line spaces, and text fonts are prescribed; please do not 
-alter them. You may note peculiarities. For example, the head margin
-measures proportionately more than is customary. This measurement 
-and others are deliberate, using specifications that anticipate your paper 
-as one part of the entire proceedings, and not as an independent document. 
-Please do not revise any of the current designations.
+The breast cancer is characterized when the cells in the women's breast start
+growing uncontrollaby, which forms tumors that can be either bening or malign. 
+
+The dataset contains cell parameters such as radius mean, texture mean, area mean, 
+smoothness and so on, which are normally the parameters altered by a malignant
+tumor. 
+It is composed by 32 columns and 539 rows, that is, 32 features 
+for 539 samples. There are 2 columns between the 32 that do not represent any information 
+concerning the cells, but the identification of the pacients and their final
+diagnosis as well. Therefore, the dataset contains two classes, Malignant (M) and Benign (B),
+characterizing a binary classification problem. 
+
+Although there are only two classes, the key challenge is to build a prediction
+model based on the weight of each feature on the final result, that is, the relevance
+on the final diagnosis. It's proposed a data investigation on the possible missing values as 
+well as a dimensionality reduction since there are too many columns, what would 
+make the model too complex and probably not able to generalize if all of these 
+features were to be considered for the model construction. 
+
 
 \section{Prepare Your Paper Before Styling}
 Before you begin to format your paper, first write and save the content as a 
