@@ -48,8 +48,9 @@ Fortaleza, Brazil \\
 \maketitle
 
 \begin{abstract}
-Breast Cancer is one of the most aggressive cancer types and has a great impact in cancer mortality, mainly in women. This work analyzes tumor cells characteristics in order to provide an effective method to preprocess and reduce the dimension of the data. The presence of several predictors may provide meaningless or redundant information, what increase the cost of a Machine Learning-based techniques. In this paper, we present a framework based in Principal Component Analysis (PCA) and data normalization to clean the data and extract only the more relevant parameters.
+Breast Cancer is one of the most aggressive cancer types and has a great impact in cancer mortality, mainly in women. This work analyzes tumor cells characteristics in order to provide an effective method to preprocess and reduce the dimension of the data, since the presence of several predictors may provide redundant information, what increases the cost of a Machine Learning-based techniques. In this paper, we present a framework based in Principal Component Analysis (PCA) and data normalization to clean the data and extract only the more relevant parameters, that can preserve original data characteristics and feed a predicting model to provide a final diagnosis.
 
+% Abstract: 104 words
 % This document is a model and instructions for \LaTeX.
 % This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
 % or Math in Paper Title or Abstract.
@@ -61,35 +62,18 @@ Breast Cancer, Dimensionality Reduction, Linear regression, Machine learning, Pr
 
 \section{Introduction}
 
-\cite{Kuhn2013}, \cite{Hastie2009}, \cite{Street1993}, \cite{Abdi2010}.
+Breast Cancer is the most incident among women in the world and the leading cause of cancer death. In 2018, there were 2.1 million new cases, equivalent to 11.6\% of all cancers estimated. Regardless of the socioeconomic development of the country, the incidence of this cancer ranks among the top positions of female malignant neoplasms, even though the most frequent type of diagnosed cancer substantially vary across countries~\cite{Bray2018}.
 
-Breast Cancer is one of the most commom cancer type in women behind only of Skin Cancer. In Brazil, according to the Instituto Nacional de Câncer (INCA), approximately 59,700 women were diagnosed with Breast Cancer in 2019, with a mortality rate of 13.68 per 100,000 habitants. 
-Despite the fact that there are a limited amount of data worlwide, in some regions such as Western Europe and North America,
-breast cancer is the one with the highest incidence.
+After skin cancer, breast cancer is the most common cancer diagnosed in women in Brazil. Approximately 59,700 women were diagnosed in 2019, with a mortality rate of 13.68 per 100,000 habitants. There is not only one risk factor for breast cancer, however age over 50 is considered the most important~\cite{INCA2019}. Other factors that contribute to the increased risk of developing the disease are genetic factors and hereditary factors (cancer of ovary in the family), obesity, physical inactivity and exposure frequent exposure to ionizing radiation (environmental and behavioral factors)~\cite{Bray2018, INCA2019}.
 
-Although the treatment for it is normally agressive, early-stage cancer detection may reduce the death rate in the long term~\cite{b1}. 
-Some exams such as mammography and contrast-enhaced (CE) digital mammography are commonly used to do the diagnosis, as well as the breast biopses aims to infer if the tumor is malignant or benign, requiring trained people. 
+The funding support for breast cancer has helped to emerge diagnosis and treatment advances. Survival rates have increased, and the number of deaths associated with the disease is declining, mainly due to factors such as earlier detection, better understanding of the disease and personalized approach~\cite{Rivera2018}. Some exams such as mammography and contrast-enhaced (CE) digital mammography are commonly used to do the diagnosis, as well as the breast biopses aims to infer if the tumor is malignant or benign, requiring trained people~\cite{Sledge2014, Cardoso2014}.
 
-With the purpose of improving Breast Cancer Diagnosis, the analysis of potential cancerous cells have been made,
-retrieving features such as texture, smoothness, radius size, etc. The study of these parameters can be crucial 
-to the early-stage breast cancer detection, as it will be investigated in this work. 
+The main characteristics of malignant tumors, that causes various types of cancer, may be used as machine learning models input to assist in clinical diagnosis or even to provide an automated diagnosis. Retrieving tumor features such as texture, smoothness, radius size, etc. The stage of preprocessing and analysis of these parameters is crucial to the early-stage breast cancer detection~\cite{Street1993}. Various approach exploiting the same dataset are available in literature, e.g, linear programming, machine learning, data mining, and optimization techniques~\cite{Bennett1992, Wolberg1994, Mangasarian1995}.
 
 Throughtout this paper, the relevance of such cell caracteristics will be analyzed by statitics metrics and data visualization tools 
-with the goal of fiding a correlation or a probability relationship to the final diagnosis. The final goal is to 
-build a probabilistic model capable of predicting the malignancy of tumor cells.
+aiming to find correlation with the diagnosis. The main goal is build framework capable to provide preprocessed data to use in a probabilistic model able to predict the malignancy of tumor cells. These steps precede more complex analysis such as feature extraction, dimensionality reduction, clustering and class separation~\cite{Hastie2009, Kuhn2013, James2013}.
 
-Therefore this work focus on the search for linear relationship between the parameters 
-and the class of data, which it's refered as M for malignant and B for benign cells, wh ich can be 
-categorized as a binary classification problem. At first, it may be possible to use 
-Linear Regression techniques and Maximum Likelihood Estimator to achieve this goal, to be 
-confirmed throughout the development of the study.
-
-Feature Extraction and Dimensionality reduction \cite{Street1993}, 
-Clustering and Class Separation \cite{Mangasarian1995}, \cite{Bennett1992}.
-All the works aim to increase accuracy in breast cancer diagnosis.
-\cite{Wolberg1994}.
-\reviewUrgent{ORGANIZAR ISSO NA INTRO.}
-
+Futhermore, the Principal Component Analysis (PCA), is applied on the search for relationship between the parameters and its class, that may be categorized as a binary classification problem~\cite{Abdi2010}. The PCA is a celebrated method to compute predictors relationship and reduce the data dimension, and in this work we present the most relevant characteristics srelated to the malignant, based on the provided set.
 
 \section{Methods}
 
