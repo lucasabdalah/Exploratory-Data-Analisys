@@ -1,2 +1,12 @@
-
-output.png
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.bcf
+*.gz
+*.xml
+*.gz
+*.toc

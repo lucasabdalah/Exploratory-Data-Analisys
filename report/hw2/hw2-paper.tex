@@ -1,0 +1,72 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{caption}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+% User packages
+\usepackage{hyperref}
+\usepackage{makecell}
+
+\renewcommand\theadalign{bc}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+
+% Default parameters
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% User parameters
+\newcommand{\reviewUrgent}[1]{{\color{red} #1}} % This command is used for mandatory changes
+\newcommand{\reviewNormal}[1]{{\color{yellow} #1}} % This command is used for a strong suggestion
+\newcommand{\reviewMinor}[1]{{\color{green} #1}} % This command is used for minor changes suggestion
+
+\begin{document}
+
+\title{Regression Analysis Applied to Breast Cancer Data: From Linear to Penalized Models}
+
+\author{\IEEEauthorblockN{Brewton Morais}
+\IEEEauthorblockA{\textit{DETI} \\
+\textit{Universidade Federal do Ceará}\\
+Fortaleza, Brazil \\
+\href{mailto:brewtonlmorais@gmail.com}{brewtonlmorais@gmail.com}}
+\and
+\IEEEauthorblockN{Lucas Abdalah}
+\IEEEauthorblockA{\textit{DETI} \\
+\textit{Universidade Federal do Ceará}\\
+Fortaleza, Brazil \\
+\href{mailto:lucasabdalah@alu.ufc.br}{lucasabdalah@alu.ufc.br}}
+}
+
+\maketitle
+
+\begin{abstract}
+Breast Cancer is one of the most aggressive cancer types and has a great impact in cancer mortality, mainly in women. This work analyzes tumor cells characteristics in order to provide an effective method to preprocess and reduce the dimension of the data, since the presence of several predictors may provide redundant information, what increases the cost of a Machine Learning-based techniques. In this paper, we present a framework based in Principal Component Analysis (PCA) and data normalization to clean the data and extract only the more relevant parameters, that can preserve original data characteristics and feed a predicting model to provide a final diagnosis.
+
+% Abstract: 104 words
+% This document is a model and instructions for \LaTeX.
+% This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
+% or Math in Paper Title or Abstract.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Breast Cancer, Dimensionality Reduction, Linear regression, Machine learning, Principal Component Analysis.
+\end{IEEEkeywords}
+
+\input{manuscript/intro.tex}
+
+\input{manuscript/methods.tex}
+
+\input{manuscript/results.tex}
+
+\input{manuscript/conclusion.tex}
+
+\bibliographystyle{ieeetran}
+\bibliography{refs}
+
+\end{document}
