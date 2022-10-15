@@ -11,6 +11,28 @@ A validação cruzada consiste numa técnica para avaliar o modelo dentro conjun
 Essa estratégia serve muitas vezes para indicar quais modelos terão uma previsão melhor no conjunto de teste, visto que permite comparar os níveis de erro e variância gerado pelos modelos. Importante ressaltar que usar k muito pequeno (como apenas em dois grupos k = 2) ou muito grande (k = número de amostras) gerará problemas. No primeiro caso poderá um alto enviesamento dos modelos, visto que muitas amostras serão deixadas de fora do grupo de treino, e no segundo ocorrerá muita variância nos modelos pois os grupos utilizados no método são muito semelhantes. Portanto para compensar ambos os efeitos costuma-se usar k = 5 ou 10, visto que experimentalmente apresentam níveis aceitáveis de variância e enviesamento.
 
 \subsection{Linear Regression}
+\subsection{Notation}
+The symbol $\hat{(\cdot)}$ represents an estimated variable. The transpose operator is represented by $(\cdot)^\intercal$. 
+
+\subsection{Linear Regression}
+
+Linear regression is a simple and useful tool for supervised learning. It consists in an approach for predicting  quantitative outcome $Y$ based on a single predictor $X$. It is assumed a linear relationship between predictor and outcome~\cite{James2013}.
+
+\begin{equation}
+Y \approx \beta_0 + \beta_1 X \, . \label{eq:linear_regression}
+\end{equation}
+
+The model in Eq. \ref{eq:linear_regression} presents two constants, $\beta_0$ and $\beta_1$, which stands for intercept and slope, respectively. Hence, the main goal is to estimate both coefficients to estimate an correlation between $X$ and $Y$.
+
+We use a set for training to fit our estimated parameters, $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$, to predict any sort of model based on linear correlation.
+
+\begin{equation}
+\hat{y} = \hat{\beta}_{0} + \hat{\beta}_{1}x  \, ,
+\label{eq:est_linear_model}
+\end{equation}
+
+Taking advantage on the estimated parameters, we compute eq. \ref{eq:est_linear_model} to predict an continuos outcome.
+
 Os modelos de regressão linear são um conjunto de técnicas de análise estatística de dados, as quais tem por objetivo prever uma tendência de comportamento de um dado, a partir de outros dados já obtidos, tendo como pré-suposto que cada um dos dados já conhecidos, os preditores, tem uma relação linear com o dado de saída.
 
 Portanto esses modelos são definidos por seguirem a
