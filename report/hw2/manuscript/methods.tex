@@ -1,16 +1,72 @@
 \section{Methods}
 
+\subsection{Notation}
+To ease the comprehension of this work, this section summarizes the notation used in the presend paper and introduces some definititions.
+
+Scalars, vectors, matrices are represented by lower-case $(a, b, \dots)$, boldface lower-case $({\bf a}, {\bf b}, \dots)$ and boldface capital $({\bf A}, {\bf B}, \dots)$, respectively. The matrix transpose operator is represented by $(\cdot)^T$ and the symbol $\hat{(\cdot)}$ represents an estimated value.
+
 \subsection{Data Overview}
 
 \subsection{Data Preprocessing}
+
 \reviewUrgent{Z-Score Normalization}
+
+\reviewUrgent{Principal Component Analysis}
+
+
+\subsection{Linear Regression}
+Linear regression is a simple and useful tool for supervised learning. It consists in an approach for predicting  quantitative outcome ${\bf y}$ based on a single predictor ${\bf x}$. It is assumed a linear relationship between predictor and outcome~\cite{James2013}.
+
+\begin{equation}
+{\bf y} \approx \beta_0 + \beta_1 {\bf x} \, . \label{eq:linear_regression}
+\end{equation}
+
+The model in Eq. \ref{eq:linear_regression} presents two constants, $\beta_0$ and $\beta_1$, which stands for intercept and slope, respectively. Hence, the main goal is to estimate both coefficients to estimate an correlation between ${\bf x}$ and ${\bf y}$.
+
+We use a set for training to fit our estimated parameters, $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$, to predict any sort of model based on linear correlation with a mean-zero random error term $\epsilon$, a catch-all variable to acumulate what the model misses, since in general its true relationship is not linear~\cite{James2013}.
+
+\begin{equation}
+\hat{{\bf y}} = \hat{\beta}_{0} + \hat{\beta}_{1} {\bf x} + {\bf \epsilon} \, ,
+\label{eq:est_linear_model}
+\end{equation}
+
+Taking advantage on the estimated parameters, we compute Eq. \ref{eq:est_linear_model} to predict a continuos outcome. 
+
+However, the coefficients are unkwnon in practice and the objective of the ordinary least squares (OLS) linear regression is to find a plane that minimizes the residual sum of squares (RSS) between the observed data and the predicted response, i.e, the variance ($\sigma^2$) of the error.     
+\begin{equation}
+  \text{RSS} = e_1^2 + e_2^2 + \dots + e_n^2 \, , \label{eq:RSS}
+\end{equation}
+where the $i$-th term of $e$ represents $y_i - \hat{y}_i$.
+
+To assess the linear regression quality we may use the following indices: Mean Squared Error (MSE), Root Mean Squared Error (RMSE) and $R^2$ Statistic.
+\begin{equation}
+  \text{MSE} = \frac{1}{n} \text{RSS}
+  \label{eq:MSE}
+\end{equation}
+The error variance usually is unknown, so we may estimate it from the data taking advantage on the model in Eq.~\ref{eq:MSE}. The idea is extended by computing the square root of this model to obtain the RMSE, i.e, $\text{RMSE} = \sqrt{\text{MSE}}$. Nevertheless, the value os these indices range accordingly with the ${\bf y}$ unit~\cite{Kuhn2013}. In order to overcome this limitation, the $R^2$ statistic provides another meausure of quality between 0 and 1, independent of ${\bf y}$ scale. In general terms, it provides an index to measure the amount of variability that is left unexplained in the model fit. It implies that as the $R^2$ values approximates to 1, a large proportion of the data variability is explained by the regression.
+
+\subsection{Partial Least Squares}
+O modelo de regressão de mínimos parciais pode ser visto como uma junção das funcionalidades dos modelos de regressão linear, que buscam maximar a correlação dos preditores com saída, e os em componentes principais, que capturam as maiores variâncias nos preditores. Assim, é um método supervisionado que gera novas componentes que tenham máxima covariância com a saída, assim permitindo um número menor de componentes necessárias em relação ao PCR. Entretanto o problema da interpretabilidade dos novos preditores ainda persiste. Existem alguns algorítimos para o calculo do PLS, como o NIPALS e o SIMPLS.
+
+\clearpage
+
+\subsection{Penalized Models}
+The OLS regression approach provides an unbiased and low variance model. Although, this simple moodel present quite accurate predictions for proper data, its MSE perfomance can be improved by the addition of the sum of the squared regression parameters weighted by a penalization/regularization term ($\lambda$)~\cite{Kuhn2013}.
+\begin{equation}
+  \text{RSS}_{L_2} = \text{RSS} + \lambda \sum_{j = 1}^{P} \beta_{j}^2
+  \label{eq:ridge}
+\end{equation}
+
+The goal with the model presented in Eq.~\ref{eq:ridge} is to allow a small increase in bias, which results in a substancial drop in the error variance. It imposes a new constraint to observe, the experimental search for an optimal $\lambda$ value, to obtain an overall MSE lower than unbiased model~\cite{James2013, Kuhn2013}.
+
+\clearpage
+
+\subsection{Principal Component Regression}
+Como o conjunto de dados utilizado possui um grande
+número de preditores, seria interessante reduzir esse número para tornar o modelo mais simples e menos custoso computacionalmente. Para isso, uma das estratégias é achar as chamadas componentes principais, que são definidas pelos autovetores da matriz de covariância dos preditores. Assim projeta-se os dados em um número reduzido de preditores, aquelas atreladas aos maiores autovalores, ou seja as que apresentam uma variabilidade maior. Existem dois problemas com esse método, o primeiro é que se torna difícil a interpretação das componentes, o segundo é que o método não define as componentes pela sua relação com a saída, o que pode fazer que as componentes dominantes não apresentem correlação com a saída, o que prejudica o desenvolvimento de um modelo eficiente, pois não se pode ter controle sobre a relação dos novos preditores com a saída.
 
 \subsection{Cross Validation}
 
-\subsection{Linear Regression}
+A validação cruzada consiste numa técnica para avaliar o modelo dentro conjunto de teste, geralmente levando em conta a flexibilidade do modelo e o erro quadrático médio. Em suma divide-se o conjunto em k grupos distintos de tamanhos semelhantes, esses grupos um é removido e passa ser o conjunto de validação, então se produz os modelos a partir das amostras restantes, e para verificar  eu funcionamento tenta-se prever o conjunto de validação. Então o grupo removido retorna ao conjunto de treino e o grupo seguinte é removido e se torna o conjunto de validação. Esse processo é repetido até que todos os grupos sejam utilizados como validadores.
 
-\subsection{Penalized Models}
-
-\subsection{Principal Component Regression}
-
-\subsection{Partial Least Squares}
+Essa estratégia serve muitas vezes para indicar quais modelos terão uma previsão melhor no conjunto de teste, visto que permite comparar os níveis de erro e variância gerado pelos modelos. Importante ressaltar que usar k muito pequeno (como apenas em dois grupos k = 2) ou muito grande (k = número de amostras) gerará problemas. No primeiro caso poderá um alto enviesamento dos modelos, visto que muitas amostras serão deixadas de fora do grupo de treino, e no segundo ocorrerá muita variância nos modelos pois os grupos utilizados no método são muito semelhantes. Portanto para compensar ambos os efeitos costuma-se usar k = 5 ou 10, visto que experimentalmente apresentam níveis aceitáveis de variância e enviesamento.
