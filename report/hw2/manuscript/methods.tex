@@ -1,20 +1,45 @@
 \section{Methods}
 
+\subsection{Data Overview}
+For the development of the predictive models we use the Solubility data set~\footnote{\url{https://cran.r-project.org/web/packages/AppliedPredictiveModeling/}} provided by the Springer book 'Applied Predictive Modeling'~\cite{Kuhn2013} available as a built-in package in the R Project for Statistical Computing~\cite{Rproject2022}. 
+
+The data consist of 1267 observations (samples) of various chemical compounds, with the solubility of the compound as the output. While the predictors are divided into three groups, the first with 208 binary predictors referring to the presence of a specific chemical substructure, the second with 16 predictors counting chemical bonds and certain types of atoms, and the third with four continuous predictors with characteristics of the compounds, such as molecular mass. 
+
+The binary predictors are labeled with \textit{FP001} until the predictor \textit{FP208}. The remaining 16 continuous predictors are identtified as: \textit{MolWeight}, \textit{NumAtoms}, \textit{NumNonHAtoms}, \textit{NumBonds}, \textit{NumNonHBonds}, \textit{NumMultBonds}, \textit{NumRotBonds}, \textit{NumDblBonds}, \textit{NumAromaticBonds}, \textit{NumHydrogen}, \textit{NumCarbon}, \textit{NumNitrogen}, \textit{NumOxygen}, \textit{NumSulfer}, \textit{NumSulfer}, \textit{NumChlorine}, \textit{NumHalogen}, \textit{NumRings}, \textit{HydrophilicFactor}, \textit{SurfaceArea1}, \textit{SurfaceArea2}, \textit{solubility}.
+
 \subsection{Notation}
 To ease the comprehension of this work, this section summarizes the notation used in the presend paper and introduces some definititions.
 
 Scalars, vectors, matrices are represented by lower-case $(a, b, \dots)$, boldface lower-case $({\bf a}, {\bf b}, \dots)$ and boldface capital $({\bf A}, {\bf B}, \dots)$, respectively. The matrix transpose operator is represented by $(\cdot)^T$ and the symbol $\hat{(\cdot)}$ represents an estimated value.
 
-\subsection{Data Overview}
-For the development of the predictive models we use the Solubility data set~\footnote{\url{https://cran.r-project.org/web/packages/AppliedPredictiveModeling/}} provided by the Springer book 'Applied Predictive Modeling'~\cite{Kuhn2013} available as a built-in package in the R Project for Statistical Computing~\cite{Rproject2022}. 
-
-The data consist of 1267 observations (samples) of various chemical compounds, with the solubility of the compound as the output. While the predictors are divided into three groups, the first with 208 binary predictors referring to the presence of a specific chemical substructure, the second with 16 predictors counting chemical bonds and certain types of atoms, and the third with four continuous predictors with characteristics of the compounds, such as molecular mass.
-
 \subsection{Data Preprocessing}
 
-\reviewUrgent{Z-Score Normalization}
+Continuos and binary predictors contribute in different ways to the construction of the model, to define the best approach for each one. 
 
-\reviewUrgent{Principal Component Analysis}
+For continuous data, we assess data mean, variance and skewness, to verify the existence of a significant presence of a left or right bias. In order to mitigate scale distortion bewteen continuos predictors and others associated issues, we normalize the data before generate and inferences from the data. We choose the z-score normalization, to perform a centering and scaling of the data to have a fair comparaison of the histograms, correlation plots and further operators. 
+
+For normal distributions, only the knowledge of two statistics is enough to describe the set: mean ($\mu$) and standard deviation ($\sigma$) of the samples, summarized as $\mathcal{N}(\mu, \sigma^2)$. The z-score, or standard score, is a technique that shift and rescale the data, to provide a simplified version of each predictor representation, centered on zero, i.e, zero-mean distribution, and unitary standard deviation. So for a normal population distribution, it is enough to describe as $\mathcal{N}(0, 1)$.
+
+We compute the sample mean ($\Bar{x}$) for each predictor:
+\begin{equation}
+  \Bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i \, , \label{eq:mean}
+\end{equation}
+
+From the Eq.~\ref{eq:mean}, we may obtain the standard deviation:
+\begin{equation}
+  \sigma = \sqrt{\frac{\sum_{i=1}^{N} (x_i - \bar{x})}{N}} \, , \label{eq:std}
+\end{equation}
+
+Finally, from results of both equations~\ref{eq:mean} and \ref{eq:std}, we obtain the transformed data $z_i$:
+\begin{equation}
+  z_i = \frac{x_i - \Bar{x}}{\sigma} \, .
+\end{equation}
+
+A model constructed from a non-normalized data set may present a biased outcomes, since the model is sensitive to variance. Moreover, in a non-normalized data, for large variance difference between the predictors, those with the greatest values misrepresent its relevance and distort the model, since it can be interpreted as delivering more relevant information, e.g, signal power/energy in digital signal processing field.
+
+From the normalization we may use the covariance matrix and principal component analysis (PCA) to identify the predictors and its linear combinations that actually contribute to the model, producing a correlation analysis. It aims to identify those that carry redundant information, and in some cases eliminate it from the assessment. It also support the identification of the best set of regression tools applied, because in case that too many predictors have non-linear or more complex relationship, more powerful tools may be applied due its capacity of dealing with such complicated problems. 
+
+It was checked if there were any missing values, but it was found that all data is fully completed, which eliminates the need of any data compensation technique. 
 
 \subsection{Linear Regression}
 Linear regression is a simple and useful tool for supervised learning. It consists in an approach for predicting  quantitative outcome ${\bf y}$ based on a single predictor ${\bf x}$. It is assumed a linear relationship between predictor and outcome~\cite{James2013}.
