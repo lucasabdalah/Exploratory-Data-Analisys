@@ -1,10 +1,36 @@
+\clearpage
+
 \section{Results}
 
+\subsection{Covariance Matrix and Predictors Relationship}
+The degree of the linear relationship between two variables may be measured using the covariance coefficients $(p)$. It ranges from -1 to +1, where large positive and negative values indicates positively and negatively correlated data,respectively. Its absolute magnitude measures the degree of redundancy. If the covariance is close to zero, the data is uncorrelated~\cite{Kuhn2013}.
+
 \begin{figure}[htbp!]
-  \centerline{\includegraphics[width=0.7 \textwidth]{../../code/hw2/figures/1-correlation_matrix.pdf}}
+  \centerline{\includegraphics[width=0.65\textwidth]{../../code/hw2/figures/1-correlation_matrix.pdf}}
   \caption{Correlation Matrix presented as a Heatmap.}
   \label{fig:1-correlation_matrix}
 \end{figure}
+
+In order to provide data covariance, we compute the covariance matrix and present it is a heatmap for visualization simplicity. Fig.~\ref{fig:1-correlation_matrix} shows that various predictors are strongly correlated, mainly positive.
+
+\begin{table}[htbp]
+  \caption{Covariance threshold analysis.}
+  \begin{center}
+  \begin{tabular}{|c|c|}
+          \hline 
+          $|p| \geq$ & Related Pairs\\
+          \hline
+          $0.75$ & 25\\
+          \hline
+          $0.90$ & 14 \\
+          \hline
+  \end{tabular}
+  \label{tab:Covariance}
+  \end{center}
+  \end{table}
+
+% \clearpage
+
 
 \reviewUrgent{Linear Regression Model}
 
@@ -14,7 +40,6 @@
 
 \reviewUrgent{Partial Least Squares}
 
-\clearpage
 
 % Inicialmente, é importante iniciar a análise do conjunto de dados verificando se existe a presença de algum nível de assimetria nas distribuições dos preditores. Caso existe assimetria no conjunto de dados é importante realizar uma transformação Box-Cox, aproximando o máximo possível a distribuição do conjunto de dados de uma distribuição normal.
 
