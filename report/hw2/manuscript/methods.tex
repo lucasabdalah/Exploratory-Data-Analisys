@@ -6,6 +6,9 @@ To ease the comprehension of this work, this section summarizes the notation use
 Scalars, vectors, matrices are represented by lower-case $(a, b, \dots)$, boldface lower-case $({\bf a}, {\bf b}, \dots)$ and boldface capital $({\bf A}, {\bf B}, \dots)$, respectively. The matrix transpose operator is represented by $(\cdot)^T$ and the symbol $\hat{(\cdot)}$ represents an estimated value.
 
 \subsection{Data Overview}
+For the development of the predictive models we use the Solubility data set~\footnote{\url{https://cran.r-project.org/web/packages/AppliedPredictiveModeling/}} provided by the Springer book 'Applied Predictive Modeling'~\cite{Kuhn2013} available as a built-in package in the R Project for Statistical Computing~\cite{Rproject2022}. 
+
+The data consist of 1267 observations (samples) of various chemical compounds, with the solubility of the compound as the output. While the predictors are divided into three groups, the first with 208 binary predictors referring to the presence of a specific chemical substructure, the second with 16 predictors counting chemical bonds and certain types of atoms, and the third with four continuous predictors with characteristics of the compounds, such as molecular mass.
 
 \subsection{Data Preprocessing}
 
@@ -70,11 +73,6 @@ A validação cruzada consiste numa técnica para avaliar o modelo dentro conjun
 
 Essa estratégia serve muitas vezes para indicar quais modelos terão uma previsão melhor no conjunto de teste, visto que permite comparar os níveis de erro e variância gerado pelos modelos. Importante ressaltar que usar k muito pequeno (como apenas em dois grupos k = 2) ou muito grande (k = número de amostras) gerará problemas. No primeiro caso poderá um alto enviesamento dos modelos, visto que muitas amostras serão deixadas de fora do grupo de treino, e no segundo ocorrerá muita variância nos modelos pois os grupos utilizados no método são muito semelhantes. Portanto para compensar ambos os efeitos costuma-se usar k = 5 ou 10, visto que experimentalmente apresentam níveis aceitáveis de variância e enviesamento.
 
-
-% \section{Metodologia}
-% \subsection{Conjunto de Dados}
-
-% Os dados utilizados para o desenvolvimento dos modelos preditivos consistem de 1267 amostras de diversos compostos químicos, tendo como saída a solubilidade do composto. Enquanto os preditores são divididos em três grupos, o primeiro com 208 preditores binários referentes a presença de uma determinada subestrutura química específica, o segundo com 16 preditores com a contagem de ligações químicas e determinados tipos de átomos, e o terceiro com quatro preditores contínuos com características dos compostos, como por exemplo a massa molecular.
 
 % \subsection{Pré-processamento}
 
