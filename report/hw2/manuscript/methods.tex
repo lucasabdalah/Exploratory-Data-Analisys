@@ -13,7 +13,6 @@ Scalars, vectors, matrices are represented by lower-case $(a, b, \dots)$, boldfa
 
 \reviewUrgent{Principal Component Analysis}
 
-
 \subsection{Linear Regression}
 Linear regression is a simple and useful tool for supervised learning. It consists in an approach for predicting  quantitative outcome ${\bf y}$ based on a single predictor ${\bf x}$. It is assumed a linear relationship between predictor and outcome~\cite{James2013}.
 
@@ -48,7 +47,7 @@ The error variance usually is unknown, so we may estimate it from the data takin
 \subsection{Partial Least Squares}
 O modelo de regressão de mínimos parciais pode ser visto como uma junção das funcionalidades dos modelos de regressão linear, que buscam maximar a correlação dos preditores com saída, e os em componentes principais, que capturam as maiores variâncias nos preditores. Assim, é um método supervisionado que gera novas componentes que tenham máxima covariância com a saída, assim permitindo um número menor de componentes necessárias em relação ao PCR. Entretanto o problema da interpretabilidade dos novos preditores ainda persiste. Existem alguns algorítimos para o calculo do PLS, como o NIPALS e o SIMPLS.
 
-\clearpage
+% \clearpage
 
 \subsection{Penalized Models}
 The OLS regression approach provides an unbiased and low variance model. Although, this simple moodel present quite accurate predictions for proper data, its MSE perfomance can be improved by the addition of the sum of the squared regression parameters weighted by a penalization/regularization term ($\lambda$)~\cite{Kuhn2013}.
@@ -59,7 +58,7 @@ The OLS regression approach provides an unbiased and low variance model. Althoug
 
 The goal with the model presented in Eq.~\ref{eq:ridge} is to allow a small increase in bias, which results in a substancial drop in the error variance. It imposes a new constraint to observe, the experimental search for an optimal $\lambda$ value, to obtain an overall MSE lower than unbiased model~\cite{James2013, Kuhn2013}.
 
-\clearpage
+% \clearpage
 
 \subsection{Principal Component Regression}
 Como o conjunto de dados utilizado possui um grande
@@ -70,3 +69,65 @@ número de preditores, seria interessante reduzir esse número para tornar o mod
 A validação cruzada consiste numa técnica para avaliar o modelo dentro conjunto de teste, geralmente levando em conta a flexibilidade do modelo e o erro quadrático médio. Em suma divide-se o conjunto em k grupos distintos de tamanhos semelhantes, esses grupos um é removido e passa ser o conjunto de validação, então se produz os modelos a partir das amostras restantes, e para verificar  eu funcionamento tenta-se prever o conjunto de validação. Então o grupo removido retorna ao conjunto de treino e o grupo seguinte é removido e se torna o conjunto de validação. Esse processo é repetido até que todos os grupos sejam utilizados como validadores.
 
 Essa estratégia serve muitas vezes para indicar quais modelos terão uma previsão melhor no conjunto de teste, visto que permite comparar os níveis de erro e variância gerado pelos modelos. Importante ressaltar que usar k muito pequeno (como apenas em dois grupos k = 2) ou muito grande (k = número de amostras) gerará problemas. No primeiro caso poderá um alto enviesamento dos modelos, visto que muitas amostras serão deixadas de fora do grupo de treino, e no segundo ocorrerá muita variância nos modelos pois os grupos utilizados no método são muito semelhantes. Portanto para compensar ambos os efeitos costuma-se usar k = 5 ou 10, visto que experimentalmente apresentam níveis aceitáveis de variância e enviesamento.
+
+
+% \section{Metodologia}
+% \subsection{Conjunto de Dados}
+
+% Os dados utilizados para o desenvolvimento dos modelos preditivos consistem de 1267 amostras de diversos compostos químicos, tendo como saída a solubilidade do composto. Enquanto os preditores são divididos em três grupos, o primeiro com 208 preditores binários referentes a presença de uma determinada subestrutura química específica, o segundo com 16 preditores com a contagem de ligações químicas e determinados tipos de átomos, e o terceiro com quatro preditores contínuos com características dos compostos, como por exemplo a massa molecular.
+
+% \subsection{Pré-processamento}
+
+% Inicialmente, o primeiro passo será o de verificar a obliquidade dos dados, 
+% caso haja presença significativa de uma tendência para a esquerda ou direita, seria aplicada a transformação adequada para remover consideravelmente a obliquidade dos dados. O passo seguinte seria re-escalar os dados e centralizados, para que os efeitos das distintas unidades e escalas não prejudicassem a qualidade do modelo.
+
+% O terceiro passo seria identificar os preditores que de fato contribuem para a construção do modelo, fazendo uma análise da correlação entre os preditores, visando eliminar os que seriam apenas ``elementos redundantes''. Já o quarto e último passo é a verificação da linearidade dos preditores com a saída, esse passo é essencial, pois caso um número demasiado de preditores tenham relações não-lineares e desconhecidas, torna-se-ia melhor adotar outro modelo mais complexo capaz de lidar com tais empecilhos. 
+
+% \subsection{Validação cruzada}
+
+% A validação cruzada consiste numa técnica para avaliar o modelo dentro conjunto de teste, geralmente levando em conta a flexibilidade do modelo e o erro quadrático médio. Em suma divide-se o conjunto em $k$ grupos distintos de tamanhos semelhantes, desses grupos um é removido e passa ser o conjunto de validação, então se produz os modelos a partir das amostras restantes, e para verificar seu funcionamento tenta-se prever o conjunto de validação. Então o grupo removido retorna ao conjunto de treino e o grupo seguinte é removido e se torna o conjunto de validação. Esse processo é repetido até que todos os grupos sejam utilizados como validadores.
+
+% Essa estratégia serve muitas vezes para indicar quais modelos terão uma previsão melhor no conjunto de teste, visto que permite comparar os níveis de erro e variância gerado pelos modelos. 
+
+% Importante ressaltar que usar $k$ muito pequeno (como apenas em dois grupos $k=2$) ou muito grande ($k = \text{número de amostras}$) gerará problemas. No primeiro caso poderá um alto enviesamento dos modelos, visto que muitas amostras serão deixadas de fora do grupo de treino, e no segundo ocorrerá muita variância nos modelos pois os grupos utilizados no método são muito semelhantes. Portanto para compensar ambos os efeitos costuma-se usar $k=5 \,\, \text{ou} \,\, 10$, visto que experimentalmente apresentam níveis aceitáveis de variância e enviesamento.
+
+% \subsection{Regressão Linear}
+% Os modelos de regressão linear são um conjunto de técnicas de análise estatística de dados, as quais tem por objetivo prever uma tendência de comportamento de um dado, a partir de outros dados já obtidos, tendo como pré-suposto que cada um dos dados já conhecidos, os preditores, tem uma relação linear com o dado de saída.
+
+% Portanto esses modelos são definidos por seguirem a seguinte equação:
+% \begin{equation}\label{eq:reglin}
+% y_i = \beta_0 + \sum_{i=1}^n \left( \beta_i x_i + e_i\right)  
+% \end{equation}
+% Sendo $y_i$ o valor de cada saída, $x_i$ cada preditor, $\beta_i$ os coeficientes que determinam a relação de cada um dos preditores com a saída, e $e_i$ os erros que não podem ser previstos, ou seja, o típico ruído.  
+
+% Os parâmetros $\beta_i$ não podem ser definidos com absoluta certeza, em virtude dos elementos de erro $e_i$. Entretanto, sendo o erro suficientemente pequeno, é possível obter uma boa aproximação desses valores. O objetivo se torna definir o plano que minimiza a soma dos erros quadráticos entre os valores reais e os estimados, a ponto que a diferença seria apenas gerada pelo fator de erro $e_i$. 
+% \begin{equation}\label{eq:sse}
+%     \text{SSE}=\sum_{i=1}^n (y_i - \hat{y}_i)^2
+% \end{equation}
+% Sendo SSE a soma dos erros quadráticos e $\hat{y}_i$ o valor de cada predição do modelo. Assim, podemos obter estimativas coerentes a partir da seguinte equação vetorial:
+% \begin{equation}\label{eq:betas}
+% \mathbf{\hat{\boldsymbol{\beta}}} = \left( \mathbf{X}^T\mathbf{X}  \right)^{-1}\mathbf{X}^T \mathbf{y}
+% \end{equation}
+% Onde $\mathbf{X} = \left( \mathbf{X}_1, \mathbf{X}_2, \dots,\mathbf{X}_n \right)$, $\mathbf{y}$ o vetor com cada resposta, e $\mathbf{\hat{\boldsymbol{\beta}}}$ o vetor com a estimação dos parâmetros $\beta_i$.
+
+% Métodos desse tipo são aplicáveis em diversos tipos de previsões, desde observações químicas a efeitos econômicos. Isso se deve ao fato de ser facilmente compreensível e de fácil aplicação. Porém, caso haja uma relação não linear relevante entre os preditores e a saída, esses modelos não serão capazes de prever corretamente a variável desejada.
+
+% \subsection{Modelos penalizados de fatores quadráticos}
+
+% Os modelos de regressão simples costumam não ter enviesamento, porém podem podem apresentar um certo nível de variância em relação aos resultados finais com suas previsões. Então, para tal visa-se aumentar levemente o enviesamento dos dados a fim de obter um decrescimento mais expressivo na variância do modelo. Para isso altera-se a equação de minimização da somas dos erros quadráticos adicionando um novo elemento:
+% \begin{equation}\label{eq:ssel2}
+%     \text{SSE}_\text{L2} = \sum_{i=1}^n (y_i - \hat{y}_i)^2 + \lambda\sum_{i=1}^n \beta_i^2
+% \end{equation}
+% Sendo $\lambda$ um parâmetro a ser determinado experimentalmente. A equação \ref{eq:ssel2} serve para controlar as grandezas dos parâmetros $\beta_i$, permitindo que seus valores sejam altos apenas se contribuírem para a minimização da equação. Então a medida que $\lambda$ aumenta os fatores $\beta_i$ tendem a diminuir, podendo muitas vezes tornar o preditor associado desprezível. Por isso esse método faz parte do conjunto de métodos denominados métodos de diminuição.
+
+% Portanto sendo feito os ajustes do parâmetro $\lambda$ pode-se chegar a um modelo com variância menor e com baixo enviesamento, o que pode tornar o modelo mais atrativo que a regressão simples.
+
+% \subsection{Regressão em componentes principais (PCR)}
+
+% Como o conjunto de dados utilizado possui um grande número de preditores, seria interessante reduzir esse número para tornar o modelo mais simples e menos custoso computacionalmente. Para isso, uma das estratégias é achar as chamadas componentes principais, que são definidas pelos autovetores da matriz de covariância dos preditores. Assim projeta-se os dados em um número reduzido de preditores, aquelas atreladas aos maiores autovalores, ou seja as que apresentam uma variabilidade maior. 
+
+% Existem dois problemas com esse método, o primeiro é que se torna difícil a interpretação das componentes, o segundo é que o método não define as componentes pela sua relação com a saída, o que pode fazer que as componentes dominantes não apresentem correlação com a saída, o que prejudica o desenvolvimento de um modelo eficiente, pois não se pode ter controle sobre a relação dos novos preditores com a saída.
+
+% \subsection{Regressão de mínimos parciais (PLS)}
+
+% O modelo de regressão de mínimos parciais pode ser visto como uma junção das funcionalidades dos modelos de regressão linear, que buscam maximar a correlação dos preditores com saída, e os em componentes principais, que capturam as maiores variâncias nos preditores. Assim, é um método supervisionado que gera novas componentes que tenham máxima covariância com a saída, assim permitindo um número menor de componentes necessárias em relação ao PCR. Entretanto o problema da interpretabilidade dos novos preditores ainda persiste. Existem alguns algorítimos para o calculo do PLS, como o NIPALS e o SIMPLS.
