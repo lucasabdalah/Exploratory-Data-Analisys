@@ -13,7 +13,6 @@ To ease the comprehension of this work, this section summarizes the notation use
 Scalars, vectors, matrices are represented by lower-case $(a, b, \dots)$, boldface lower-case $({\bf a}, {\bf b}, \dots)$ and boldface capital $({\bf A}, {\bf B}, \dots)$, respectively. The matrix transpose operator is represented by $(\cdot)^T$ and the symbol $\hat{(\cdot)}$ represents an estimated value.
 
 \subsection{Data Preprocessing}
-
 Continuos and binary predictors contribute in different ways to the construction of the model, to define the best approach for each one. 
 
 For continuous data, we assess data mean, variance and skewness, to verify the existence of a significant presence of a left or right bias. In order to mitigate scale distortion bewteen continuos predictors and others associated issues, we normalize the data before generate and inferences from the data. We choose the z-score normalization, to perform a centering and scaling of the data to have a fair comparaison of the histograms, correlation plots and further operators. 
@@ -40,6 +39,25 @@ A model constructed from a non-normalized data set may present a biased outcomes
 From the normalization we may use the covariance matrix and principal component analysis (PCA) to identify the predictors and its linear combinations that actually contribute to the model, producing a correlation analysis. It aims to identify those that carry redundant information, and in some cases eliminate it from the assessment. It also support the identification of the best set of regression tools applied, because in case that too many predictors have non-linear or more complex relationship, more powerful tools may be applied due its capacity of dealing with such complicated problems. 
 
 It was checked if there were any missing values, but it was found that all data is fully completed, which eliminates the need of any data compensation technique. 
+
+\subsection{Principal Component Analysis (PCA)}
+PCA is a dimensionality reduction techninque that works by transforming a large set of variables into a smaller one that aims to represent as much as possible it's done by all the data variables~\cite{Abdi2010}. The justification for its implementation is that, at most part of the cases, it is worth losing a little accuracy in order to make a smaller data set. Besides, with a more compact data frame, it's less expansive to construct a machine learning model, because it'll work faster and the analysis will be easier. Thus, the goal is to preserve as much information as possible even after having performed the dimensionality-reduction. The PCA is a variance sensitive method, that do impose issues, since we apply the \textit{Z-Score} normalization for all the columns with non-binary data.
+
+The following stage is to compute the eigenvectors and its eigenvalues of the covariance matrix in order to identify the principal components. But first, the definition of Principal Components~\cite{Ringner2001}: principal components are directions along which the variance of the data reaches its maximal value. They are linear combinations of the initial variables, related in such a way that the new variables are uncorrelated and the most amount of information is present mainly within the initial components.
+
+Since they are vectors, the principal components represent the directions of the data that explains a maximal variance, The fact that high variance indicates more information comes from the concept of entropy. 
+
+Finally, the mathematics behind this algorithm for the first principal component consists in finding a line that maximizes the average of square distances from the points to the origin. Then, for the second component, it's done the same, but with the condition of being orthogonal to the first line found, since they must be uncorrelated. The process is the same for the remaining components. That's where the importance of eigenvectors and eigenvalues lies, the first represents the direction of the the axes where the variance is maximum and the latter the coefficients attached to it. 
+
+As previously said, the first components always have more relevance, i.e, contain more information. Mathematically, once the eigenvectors are ordered according to their eigenvalues, the rank of principal components in significance is found as well.
+
+Finally, from the eigenvectors a feature vector $(P)$ is created containing all of these eigenvectors or just some of them, after judging if some component is necessary or not, when they have less significance. 
+
+\begin{equation}
+    Y = P X
+\end{equation}
+
+So far, no data transformation was done apart from the normalization, so it's now necessary to recast the data along the principal component axes, which is done so by using the feature vector on the standardized data $(X)$ points in order to perform a reorientation.
 
 \subsection{Linear Regression}
 Linear regression is a simple and useful tool for supervised learning. It consists in an approach for predicting  quantitative outcome ${\bf y}$ based on a single predictor ${\bf x}$. It is assumed a linear relationship between predictor and outcome~\cite{James2013}.
@@ -106,6 +124,6 @@ Cross-validation is a technique to evaluate the model within the test set, usual
 
 % A validação cruzada consiste numa técnica para avaliar o modelo dentro conjunto de teste, geralmente levando em conta a flexibilidade do modelo e o erro quadrático médio. Em suma divide-se o conjunto em k grupos distintos de tamanhos semelhantes, esses grupos um é removido e passa ser o conjunto de validação, então se produz os modelos a partir das amostras restantes, e para verificar  eu funcionamento tenta-se prever o conjunto de validação. Então o grupo removido retorna ao conjunto de treino e o grupo seguinte é removido e se torna o conjunto de validação. Esse processo é repetido até que todos os grupos sejam utilizados como validadores.
 
-This strategy often serves to indicate which models will predict better on the test set, as it allows the levels of error and variance generated by the models to be compared. Importantly, using k too small (as in only two groups k = 2) or too large (k = number of samples) will create problems. In the first case there may be a high bias in the models, since many samples will be left out of the training group, and in the second case there will be too much variance in the models because the groups used in the method are very similar. Therefore, to compensate for both effects, it is usual to use k = 5 or 10, since experimentally they present acceptable levels of variance and bias.
+This strategy often serves to indicate which models will predict better on the test set, as it allows the levels of error and variance generated by the models to be compared. Importantly, using k too small (as in only two groups k = 2) or too large (k = number of samples) will create problems. In the first case there may be a high bias in the models, since many samples will be left out of the training group, and in the second case there will be too much variance in the models because the groups used in the method are very similar. Therefore, to compensate for both effects, it is usual to use $k = 5$ or $10$, since experimentally they present acceptable levels of variance and bias. On our experimets we use the both values for $k$, 5 and 10, keeping the best solution. 
 
 % Importante ressaltar que usar $k$ muito pequeno (como apenas em dois grupos $k=2$) ou muito grande ($k = $ número de amostras) gerará problemas. No primeiro caso poderá um alto enviesamento dos modelos, visto que muitas amostras serão deixadas de fora do grupo de treino, e no segundo ocorrerá muita variância nos modelos pois os grupos utilizados no método são muito semelhantes. Portanto para compensar ambos os efeitos costuma-se usar $k=5$ ou $10$, visto que experimentalmente apresentam níveis aceitáveis de variância e enviesamento.
