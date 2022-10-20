@@ -5,14 +5,6 @@
 \subsection{Covariance Matrix and Predictors Relationship}
 The degree of the linear relationship between two variables may be measured using the covariance coefficients $(p)$. It ranges from -1 to +1, where large positive and negative values indicates positively and negatively correlated data,respectively. Its absolute magnitude measures the degree of redundancy. If the covariance is close to zero, the data is uncorrelated~\cite{Kuhn2013}.
 
-\begin{figure}[htbp!]
-  \centerline{\includegraphics[width=0.65\textwidth]{../../code/hw2/figures/1-correlation_matrix.pdf}}
-  \caption{Correlation Matrix presented as a Heatmap.}
-  \label{fig:1-correlation_matrix}
-\end{figure}
-
-In order to provide data covariance, we compute the covariance matrix and present it is a heatmap for visualization simplicity. Fig.~\ref{fig:1-correlation_matrix} shows that various predictors are strongly correlated, mainly positive.
-
 \begin{table}[htbp]
   \caption{Covariance threshold analysis.}
   \begin{center}
@@ -25,18 +17,29 @@ In order to provide data covariance, we compute the covariance matrix and presen
           $0.90$ & 14 \\
           \hline
   \end{tabular}
-  \label{tab:Covariance}
-  \end{center}
-  \end{table}
+\label{tab:Covariance}
+\end{center}
+\end{table}
 
-% \clearpage
-
+From the obtained covariance matrix, we observe that 14 predictors pairs present strong correlation, greater than 0.9. It indicates that we can reduce the data dimensionality, since these pairs carry redundancy.
 
 \begin{figure}[htbp!]
-  \centerline{\includegraphics[width=0.6\textwidth]{../../code/hw2/figures/0-PCA-screeplot.pdf}}
-  \caption{Screeplot.}
+  \centerline{\includegraphics[width=0.55\textwidth]{../../code/hw2/figures/1-correlation_matrix.pdf}}
+  \caption{Correlation Matrix presented as a Heatmap.}
+  \label{fig:1-correlation_matrix}
+\end{figure}
+
+In order to provide data covariance in a understandable approach, we compute the covariance matrix and present it is a heatmap for visualization simplicity. Fig.~\ref{fig:1-correlation_matrix} shows that various predictors are strongly correlated, mainly positive.
+
+\begin{figure}[htbp!]
+  \centerline{\includegraphics[width=0.52\textwidth]{../../code/hw2/figures/0-PCA-screeplot.pdf}}
+  \caption{Screeplot showing the normalized variance, i.e, relevance, of each Principal Component.}
   \label{fig:0-PCA-screeplot}
 \end{figure}
+
+We can see in Fig.~\ref{fig:0-PCA-screeplot}, the normalized variance, i.e, relevance on our context vs. the principal components (PC). We also present a cumulative curve, which shows that the first 6 PC carries more than 60\% of the variance, leading to 95\% with 60 PC, what we can interprete as only 60 columns, i.e, 26\% of this dataset preserve 95\% from the original information. It means dividing the complexity by 3 and improving the storage and processing cost.
+
+\reviewUrgent{Linear Regression Model}
 
 \begin{figure}[htbp!]
   \centerline{\includegraphics[width=0.5\textwidth]{../../code/hw2/figures/2-linear-regression-coefficients.pdf}}
@@ -44,11 +47,17 @@ In order to provide data covariance, we compute the covariance matrix and presen
   \label{fig:2-linear-regression-coefficients}
 \end{figure}
 
+
+\reviewUrgent{Penalized Ridge Model}
+
 \begin{figure}[htbp!]
   \centerline{\includegraphics[width=0.5\textwidth]{../../code/hw2/figures/3-lambda-ridge.pdf}}
   \caption{$\lambda$ Parameter vs. RMSE for a Ridge Model.}
   \label{fig:3-lambda-ridge}
 \end{figure}
+
+
+\reviewUrgent{Principal Component Regression}
 
 \begin{figure}[htbp!]
   \centerline{\includegraphics[width=0.5\textwidth]{../../code/hw2/figures/5-PCR-RMSE.pdf}}
@@ -56,27 +65,13 @@ In order to provide data covariance, we compute the covariance matrix and presen
   \label{fig:5-PCR-RMSE}
 \end{figure}
 
+\reviewUrgent{Partial Least Squares}
+
 \begin{figure}[htbp!]
   \centerline{\includegraphics[width=0.5\textwidth]{../../code/hw2/figures/5-PLS-RMSE.pdf}}
   \caption{Components in the Model vs. RMSE for a PLS Model.}
   \label{fig:5-PLS-RMSE}
 \end{figure}
-
-
-\begin{figure}[htbp!]
-  \centerline{\includegraphics[width=0.5\textwidth]{../../code/hw2/figures/5-summary.pdf}}
-  \caption{Best value for RMSE for the proposed approaches.}
-  \label{fig:5-summary}
-\end{figure}
-
-\reviewUrgent{Linear Regression Model}
-
-\reviewUrgent{Penalized Ridge Model}
-
-\reviewUrgent{Principal Component Regression}
-
-\reviewUrgent{Partial Least Squares}
-
 
 % Inicialmente, é importante iniciar a análise do conjunto de dados verificando se existe a presença de algum nível de assimetria nas distribuições dos preditores. Caso existe assimetria no conjunto de dados é importante realizar uma transformação Box-Cox, aproximando o máximo possível a distribuição do conjunto de dados de uma distribuição normal.
 
