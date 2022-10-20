@@ -39,7 +39,9 @@ In order to provide data covariance in a understandable approach, we compute the
 
 We can see in Fig.~\ref{fig:0-PCA-screeplot}, the normalized variance, i.e, relevance on our context vs. the principal components (PC). We also present a cumulative curve, which shows that the first 6 PC carries more than 60\% of the variance, leading to 95\% with 60 PC, what we can interprete as only 60 columns, i.e, 26\% of this dataset preserve 95\% from the original information. It means dividing the complexity by 3 and improving the storage and processing cost.
 
-\reviewUrgent{Linear Regression Model}
+\subsection{Linear Regression Model}
+
+Para a primeira abordagem foi implementado um modelo de regressão simples, utilizando a equação (\ref{eq:betas}). Os resultados foram razoavelmente satisfatórios, apresentando uma raiz de erro médio quadrático (RMSE) de 0,746, e a estatística $\text{R}^2$ em 0,872. O gráfico comparando os valores obtidos no modelo com os preditos está na figura (\ref{fig:2-linear-regression-coefficients}).
 
 \begin{figure}[htbp!]
   \centerline{\includegraphics[width=0.5\textwidth]{../../code/hw2/figures/2-linear-regression-coefficients.pdf}}
@@ -47,6 +49,7 @@ We can see in Fig.~\ref{fig:0-PCA-screeplot}, the normalized variance, i.e, rele
   \label{fig:2-linear-regression-coefficients}
 \end{figure}
 
+\clearpage
 
 \reviewUrgent{Penalized Ridge Model}
 
@@ -73,35 +76,10 @@ We can see in Fig.~\ref{fig:0-PCA-screeplot}, the normalized variance, i.e, rele
   \label{fig:5-PLS-RMSE}
 \end{figure}
 
-% Inicialmente, é importante iniciar a análise do conjunto de dados verificando se existe a presença de algum nível de assimetria nas distribuições dos preditores. Caso existe assimetria no conjunto de dados é importante realizar uma transformação Box-Cox, aproximando o máximo possível a distribuição do conjunto de dados de uma distribuição normal.
-
-% Após essas ações, foi necessário utilizar as ferramentas de centralização de média e normalização de variância para compensar a variedade nas unidades de medida associadas ao conjunto de preditores. Em seguida, é necessário analisar a linearidade dos preditores com as saídas por meio do ``scatter plot'' na figura (\ref{im:scatter}).
-
-% % \begin{figure}[h]
-% %     \centering
-% %     \captionsetup{justification = centering,margin=1cm}
-% %     \caption{ScatterPlot de um preditor linear e de um preditor não-linear, respectivamente.}
-% %     \label{im:scatter}
-% %     \includegraphics[width=0.4\textwidth, trim={0cm 14cm 13cm 1cm},clip]{images/ScatterPlot1.pdf}
-% % \end{figure}
-
-% Por meio da análise do ``scatter plot'' de todos os preditores é possível verificar que existe uma forte tendência a linearidade no conjunto de dados a ser modelado, embora exista alguns preditores que possuem uma tendência não linear ou uma tendência linear descontinuada em múltiplos intervalos. Sendo assim, é possível utilizar métodos de regressão linear a esse conjunto de dados e esperar uma precisão aceitável na predição.
-
-% Finalmente, utiliza-se a  análise da componente principal(PCA) para reduzir a redundância possivelmente presente na matriz de dados. Logo a seguir é apresentada a matriz de correlação dos preditores:
-
-% % \begin{figure}[h]
-% %     \centering
-% %     \captionsetup{justification = centering,margin=1cm}
-% %     \caption{Matriz de Correlação dos Preditores}
-% %     \label{fig:my_label}
-% %     \includegraphics[width=0.5\textwidth, trim={4cm 4cm 0cm 7cm},clip]{images/MatrizCorrelacao.pdf}
-% % \end{figure}
-
 % %Parte 1
 
 % \subsection{Regressão simples}
 
-% Para a primeira abordagem foi implementado um modelo de regressão simples, utilizando a equação (\ref{eq:betas}). Os resultados foram razoavelmente satisfatórios, apresentando uma raiz de erro médio quadrático (RMSE) de 0,746, e a estatística $\text{R}^2$ em 0,872. O gráfico comparando os valores obtidos no modelo com os preditos está na figura (\ref{im:rsimples}).
 
 % % \begin{figure}[h]
 % %     \centering
