@@ -24,7 +24,7 @@ The degree of the linear relationship between two variables may be measured usin
 From the obtained covariance matrix, we observe that 14 predictors pairs present strong correlation, greater than 0.9. It indicates that we can reduce the data dimensionality, since these pairs carry redundancy.
 
 \begin{figure}[htbp!]
-  \centerline{\includegraphics[width=0.55\textwidth]{../../code/hw2/figures/1-correlation_matrix.pdf}}
+  \centerline{\includegraphics[width=0.5\textwidth]{../../code/hw2/figures/1-correlation_matrix.pdf}}
   \caption{Correlation Matrix presented as a Heatmap.}
   \label{fig:1-correlation_matrix}
 \end{figure}
@@ -32,7 +32,7 @@ From the obtained covariance matrix, we observe that 14 predictors pairs present
 In order to provide data covariance in a understandable approach, we compute the covariance matrix and present it is a heatmap for visualization simplicity. Fig.~\ref{fig:1-correlation_matrix} shows that various predictors are strongly correlated, mainly positive.
 
 \begin{figure}[htbp!]
-  \centerline{\includegraphics[width=0.52\textwidth]{../../code/hw2/figures/0-PCA-screeplot.pdf}}
+  \centerline{\includegraphics[width=0.50\textwidth]{../../code/hw2/figures/0-PCA-screeplot.pdf}}
   \caption{Screeplot showing the normalized variance, i.e, relevance, of each Principal Component.}
   \label{fig:0-PCA-screeplot}
 \end{figure}
@@ -72,7 +72,7 @@ As the last approach to developing the predictive model, two models using dimens
   \label{fig:5-PCR-RMSE}
 \end{figure}
 
-We can observe Fig.~\ref{fig:5-PCR-RMSE}) that in an increase of the dimensions doess not implies in a considerable decrease of RMSE for all cases, what allow us to infer that some of these dimensions do not present correlation with output as previously described. It is worth noting that the initial value is also relatively high, and even with 40 dimensions, the accuracy achieved during cross-validation was RMSE = 0.647 and $\text{R}^2$ = 0.821, values lower than the results applied to the test set with simple regression. 
+We can observe Fig.~\ref{fig:5-PCR-RMSE}) that in an increase of the dimensions does not implies in a considerable decrease of RMSE for all cases, what allow us to infer that some of these dimensions do not present correlation with output as previously described. It is worth noting that the initial value is also relatively high, and even with 40 dimensions, the accuracy achieved for the cross-validation was RMSE = 0.666 and $\text{R}^2$ = 0.246.
 
 \begin{figure}[htbp!]
   \centerline{\includegraphics[width=0.5\textwidth]{../../code/hw2/figures/5-PLS-RMSE.pdf}}
@@ -80,22 +80,4 @@ We can observe Fig.~\ref{fig:5-PCR-RMSE}) that in an increase of the dimensions 
   \label{fig:5-PLS-RMSE}
 \end{figure}
 
-The most aggravating was that the application on the test set had a worse result, with RMSE = 0.898 and $\text{R}^2$ = 0.813. These results lead us to conclude that the regression in independent components is not suitable for the proposed problem since simpler solutions provide better results.
-
-
-
-There is also the option to increase even more the number of PCs used in the model to improve the RMSE, however it impacts on the model performance.
-
-
-
-% Interessante observar que na figura (\ref{im:pcr}) nem sempre que há um aumento de dimensões há uma diminuição considerável do RMSE, nos permitindo inferir que algumas dessas dimensões não apresentam correlação com saída como descrito anteriormente. Vale ressaltar que o valor inicial também é relativamente elevado, e mesmo com 40 dimensões, a precisão atingida durante a validação cruzada foi de RMSE = 0.872 e $\text{R}^2$ = 0.821, valores inferiores ao resultados a aplicação no conjunto de teste com regressão simples. O maior agravante foi que a aplicação no conjunto de teste teve um resultado pior, com RMSE = 0.898 e $\text{R}^2$ = 0.813. Esses resultados nos levaram a concluir que a regressão em componentes independentes não é adequada para o problema proposto visto que soluções mais simples fornecem resultados melhores.
-
-% % \begin{figure}[h]
-% %     \centering
-% %     \captionsetup{justification = centering,margin=1cm}
-% %     \caption{RMSE em PLS}
-% %     \includegraphics[width=0.3\textwidth]{images/ComponentsxRMSE_PLS.pdf}
-% %     \label{im:pls}
-% % \end{figure}
-
-% Em seguida aplicamos a regressão em PLS, e obtivemos resultados mais otimistas. Ao realizar a validação cruzada, ilustrado na figura (\ref{im:pls}), obtivemos uma curva mais optimizada e com um número muito menor de dimensões que a PCR. Vale ressaltar que principalmente ao se adicionar as primeiras dimensões, temos reduções expressivas no RMSE, que tende a se estabilizar a medida que se ultrapassa 17 dimensões. Durante a a validação o melhor resultado (dentre as 20 dimensões) se deu com 19 dimensões, com RMSE = 0.695 e $\text{R}^2$ = 0.887. Esses número são claramente mais desejáveis que os obtidos via PCR, quanto aos obtidos no grupo de teste foram, RMSE = 0.732 e $\text{R}^2$ = 0.877, esses são suavemente superiores aos obtidos via regressão simples, o quais dependendo do banco de dados final ou da precisão necessária, provavelmente não compensarão o esforço computacional extra.
+For the PLS, a considerable improvement of RMSE is shown Fig.~\ref{fig:5-PLS-RMSE} as we increase of the dimensions. It starts from RMSE value equivalent to OLS and Ridge model, futhermore, for the regression with 40 PCs, the accuracy achieved for the cross-validation was RMSE = 0.061 and $\text{R}^2$ = 0.996.
