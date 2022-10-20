@@ -1,18 +1,63 @@
 \section{Methods}
 
+\subsection{Data Overview}
+For the development of the predictive models, we use the Solubility data set~\footnote{\url{https://cran.r-project.org/web/packages/AppliedPredictiveModeling/}} provided by the Springer book 'Applied Predictive Modeling'~\cite{Kuhn2013} available as a built-in package in the R Project for Statistical Computing~\cite{Rproject2022}. 
+
+The data consist of 1267 observations (samples) of various chemical compounds, with the solubility of the compound as the output. While the predictors are divided into three groups, the first with 208 binary predictors referring to the presence of a specific chemical substructure, the second with 16 predictors counting chemical bonds and certain types of atoms, and the third with four continuous predictors with characteristics of the compounds, such as molecular mass. 
+
+The binary predictors are labeled with \textit{FP001} until the predictor \textit{FP208}. The remaining 16 continuous predictors are identtified as: \textit{MolWeight}, \textit{NumAtoms}, \textit{NumNonHAtoms}, \textit{NumBonds}, \textit{NumNonHBonds}, \textit{NumMultBonds}, \textit{NumRotBonds}, \textit{NumDblBonds}, \textit{NumAromaticBonds}, \textit{NumHydrogen}, \textit{NumCarbon}, \textit{NumNitrogen}, \textit{NumOxygen}, \textit{NumSulfer}, \textit{NumSulfer}, \textit{NumChlorine}, \textit{NumHalogen}, \textit{NumRings}, \textit{HydrophilicFactor}, \textit{SurfaceArea1}, \textit{SurfaceArea2}, \textit{solubility}.
+
 \subsection{Notation}
 To ease the comprehension of this work, this section summarizes the notation used in the presend paper and introduces some definititions.
 
 Scalars, vectors, matrices are represented by lower-case $(a, b, \dots)$, boldface lower-case $({\bf a}, {\bf b}, \dots)$ and boldface capital $({\bf A}, {\bf B}, \dots)$, respectively. The matrix transpose operator is represented by $(\cdot)^T$ and the symbol $\hat{(\cdot)}$ represents an estimated value.
 
-\subsection{Data Overview}
-
 \subsection{Data Preprocessing}
+Continuos and binary predictors contribute in different ways to the construction of the model, to define the best approach for each one. 
 
-\reviewUrgent{Z-Score Normalization}
+For continuous data, we assess data mean, variance and skewness, to verify the existence of a significant presence of a left or right bias. In order to mitigate scale distortion bewteen continuos predictors and others associated issues, we normalize the data before generating inferences from the data. We choose the z-score normalization, to perform a centering and scaling of the data to have a fair comparaison of the histograms, correlation plots and further operators. 
 
-\reviewUrgent{Principal Component Analysis}
+For normal distributions, only the knowledge of two statistics is enough to describe the set: mean ($\mu$) and standard deviation ($\sigma$) of the samples, summarized as $\mathcal{N}(\mu, \sigma^2)$. The z-score, or standard score, is a technique that shift and rescale the data, providing a simplified version of each predictor representation, centered on zero, i.e, zero-mean distribution, and unitary standard deviation. So for a normal population distribution, it is enough to describe as $\mathcal{N}(0, 1)$.
 
+We compute the sample mean ($\Bar{x}$) for each predictor:
+\begin{equation}
+  \Bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i \, , \label{eq:mean}
+\end{equation}
+
+From the Eq.~\ref{eq:mean}, we may obtain the standard deviation:
+\begin{equation}
+  \sigma = \sqrt{\frac{\sum_{i=1}^{N} (x_i - \bar{x})}{N}} \, , \label{eq:std}
+\end{equation}
+
+Finally, from results of both equations~\ref{eq:mean} and \ref{eq:std}, we obtain the transformed data $z_i$:
+\begin{equation}
+  z_i = \frac{x_i - \Bar{x}}{\sigma} \, .
+\end{equation}
+
+A model constructed from a non-normalized data set may present a biased outcome, since the model is sensitive to variance. Moreover, in a non-normalized data, for large variance difference between the predictors, those with the greatest values misrepresent its relevance and distort the model, once it can be interpreted as delivering more relevant information, e.g, signal power/energy in digital signal processing field.
+
+From the normalization we may use the covariance matrix and principal component analysis (PCA) to identify the predictors and its linear combinations that actually contribute to the model, producing a correlation analysis. It aims to identify those that carry redundant information, and in some cases eliminate it from the assessment. It also supports the identification of the best set of regression tools applied, because in case that too many predictors have non-linear or more complex relationship, more powerful tools may be applied due their capacity of dealing with such complicated problems. 
+
+It was checked if there were any missing values, but it was found that all data is fully completed, which eliminates the need of any data compensation technique. 
+
+\subsection{Principal Component Analysis (PCA)}
+PCA is a dimensionality reduction techninque that works by transforming a large set of variables into a smaller one that aims to represent as much as possible it's done by all the data variables~\cite{Abdi2010}. The justification for its implementation is that, at most part of the cases, it is worth losing a little accuracy in order to make a smaller data set. Besides, with a more compact data frame, it's less expansive to construct a machine learning model, because it'll work faster and the analysis will be easier. Thus, the goal is to preserve as much information as possible even after having performed the dimensionality-reduction. The PCA is a variance sensitive method, that do impose issues, since we apply the \textit{Z-Score} normalization for all the columns with non-binary data.
+
+The following stage is to compute the eigenvectors and its eigenvalues of the covariance matrix in order to identify the principal components. But first, the definition of Principal Components~\cite{Ringner2001}: principal components are directions along which the variance of the data reaches its maximal value. They are linear combinations of the initial variables, related in such a way that the new variables are uncorrelated and the most amount of information is present mainly within the initial components.
+
+Since they are vectors, the principal components represent the directions of the data that explains a maximal variance, The fact that high variance indicates more information comes from the concept of entropy. 
+
+Finally, the mathematics behind this algorithm for the first principal component consists in finding a line that maximizes the average of square distances from the points to the origin. Then, for the second component, it's done the same, but with the condition of being orthogonal to the first line found, since they must be uncorrelated. The process is the same for the remaining components. That's where the importance of eigenvectors and eigenvalues lies, the first represents the direction of the the axes where the variance is maximum and the latter the coefficients attached to it. 
+
+As previously said, the first components always have more relevance, i.e, contain more information. Mathematically, once the eigenvectors are ordered according to their eigenvalues, the rank of principal components in significance is found as well.
+
+Finally, from the eigenvectors a feature vector $(P)$ is created containing all of these eigenvectors or just some of them, after judging if some component is necessary or not, when they have less significance. 
+
+\begin{equation}
+    Y = P X
+\end{equation}
+
+So far, no data transformation was done apart from the normalization, so it's now necessary to recast the data along the principal component axes, which is done so by using the feature vector on the standardized data $(X)$ points in order to perform a reorientation.
 
 \subsection{Linear Regression}
 Linear regression is a simple and useful tool for supervised learning. It consists in an approach for predicting  quantitative outcome ${\bf y}$ based on a single predictor ${\bf x}$. It is assumed a linear relationship between predictor and outcome~\cite{James2013}.
@@ -21,7 +66,7 @@ Linear regression is a simple and useful tool for supervised learning. It consis
 {\bf y} \approx \beta_0 + \beta_1 {\bf x} \, . \label{eq:linear_regression}
 \end{equation}
 
-The model in Eq. \ref{eq:linear_regression} presents two constants, $\beta_0$ and $\beta_1$, which stands for intercept and slope, respectively. Hence, the main goal is to estimate both coefficients to estimate an correlation between ${\bf x}$ and ${\bf y}$.
+The model in Eq. \ref{eq:linear_regression} presents two constants, $\beta_0$ and $\beta_1$, which stand for intercept and slope, respectively. Hence, the main goal is to estimate both coefficients to estimate an correlation between ${\bf x}$ and ${\bf y}$.
 
 We use a set for training to fit our estimated parameters, $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$, to predict any sort of model based on linear correlation with a mean-zero random error term $\epsilon$, a catch-all variable to acumulate what the model misses, since in general its true relationship is not linear~\cite{James2013}.
 
@@ -45,10 +90,15 @@ To assess the linear regression quality we may use the following indices: Mean S
 \end{equation}
 The error variance usually is unknown, so we may estimate it from the data taking advantage on the model in Eq.~\ref{eq:MSE}. The idea is extended by computing the square root of this model to obtain the RMSE, i.e, $\text{RMSE} = \sqrt{\text{MSE}}$. Nevertheless, the value os these indices range accordingly with the ${\bf y}$ unit~\cite{Kuhn2013}. In order to overcome this limitation, the $R^2$ statistic provides another meausure of quality between 0 and 1, independent of ${\bf y}$ scale. In general terms, it provides an index to measure the amount of variability that is left unexplained in the model fit. It implies that as the $R^2$ values approximates to 1, a large proportion of the data variability is explained by the regression.
 
-\subsection{Partial Least Squares}
-O modelo de regressão de mínimos parciais pode ser visto como uma junção das funcionalidades dos modelos de regressão linear, que buscam maximar a correlação dos preditores com saída, e os em componentes principais, que capturam as maiores variâncias nos preditores. Assim, é um método supervisionado que gera novas componentes que tenham máxima covariância com a saída, assim permitindo um número menor de componentes necessárias em relação ao PCR. Entretanto o problema da interpretabilidade dos novos preditores ainda persiste. Existem alguns algorítimos para o calculo do PLS, como o NIPALS e o SIMPLS.
+To compute the $\beta$ parameters with a matrix approach, we may apply algebraic manipulation, assuming a non-singular matrix ${\bf X} = \left( \mathbf{x}_1^T, \mathbf{x}_2^T, \dots,\mathbf{x}_n^T \right)$, where each $\mathbf{x}_i$ is a predictor. 
+\begin{equation}
+\mathbf{\hat{\boldsymbol{\beta}}} = \left( \mathbf{X}^T\mathbf{X}  \right)^{-1}\mathbf{X}^T \mathbf{y} \, . \label{eq:betas}
+\end{equation}
 
-\clearpage
+The model shown in eq.~\ref{eq:betas} is an extension~\cite{Kuhn2013} to the concept presented in eq.~\ref{eq:linear_regression}, which is applied in this paper.
+
+
+% \clearpage
 
 \subsection{Penalized Models}
 The OLS regression approach provides an unbiased and low variance model. Although, this simple moodel present quite accurate predictions for proper data, its MSE perfomance can be improved by the addition of the sum of the squared regression parameters weighted by a penalization/regularization term ($\lambda$)~\cite{Kuhn2013}.
@@ -59,14 +109,21 @@ The OLS regression approach provides an unbiased and low variance model. Althoug
 
 The goal with the model presented in Eq.~\ref{eq:ridge} is to allow a small increase in bias, which results in a substancial drop in the error variance. It imposes a new constraint to observe, the experimental search for an optimal $\lambda$ value, to obtain an overall MSE lower than unbiased model~\cite{James2013, Kuhn2013}.
 
-\clearpage
-
 \subsection{Principal Component Regression}
-Como o conjunto de dados utilizado possui um grande
-número de preditores, seria interessante reduzir esse número para tornar o modelo mais simples e menos custoso computacionalmente. Para isso, uma das estratégias é achar as chamadas componentes principais, que são definidas pelos autovetores da matriz de covariância dos preditores. Assim projeta-se os dados em um número reduzido de preditores, aquelas atreladas aos maiores autovalores, ou seja as que apresentam uma variabilidade maior. Existem dois problemas com esse método, o primeiro é que se torna difícil a interpretação das componentes, o segundo é que o método não define as componentes pela sua relação com a saída, o que pode fazer que as componentes dominantes não apresentem correlação com a saída, o que prejudica o desenvolvimento de um modelo eficiente, pois não se pode ter controle sobre a relação dos novos preditores com a saída.
+Since the data set used has a large number of predictors, it would be interesting to reduce this number to make the model simpler and less computationally expensive.
+number of predictors, it would be interesting to reduce this number to make the model simpler and less computationally expensive. For this, one of the strategies is to find the so-called principal components, which are defined by the eigenvectors of the covariance matrix of the predictors. Thus, the data is projected onto a reduced number of predictors, those with the highest eigenvalues, that is, those with the greatest variability. There are two problems with this method, the first is that it becomes difficult to interpret the components, the second is that the method does not define the components by their relationship with the output, which may cause the dominant components do not present a correlation with the output, which hinders the development of an efficient model, because you can not have control over the relationship of new predictors with the output.
+% Como o conjunto de dados utilizado possui um grande número de preditores, seria interessante reduzir esse número para tornar o modelo mais simples e menos custoso computacionalmente. Para isso, uma das estratégias é achar as chamadas componentes principais, que são definidas pelos autovetores da matriz de covariância dos preditores. Assim projeta-se os dados em um número reduzido de preditores, aquelas atreladas aos maiores autovalores, ou seja as que apresentam uma variabilidade maior. Existem dois problemas com esse método, o primeiro é que se torna difícil a interpretação das componentes, o segundo é que o método não define as componentes pela sua relação com a saída, o que pode fazer que as componentes dominantes não apresentem correlação com a saída, o que prejudica o desenvolvimento de um modelo eficiente, pois não se pode ter controle sobre a relação dos novos preditores com a saída.
+
+\subsection{Partial Least Squares}
+The partial least squares regression model can be seen as merging the features of linear regression models, which seek to maximize the correlation of predictors with output, and those in principal components, which capture the largest variances in the predictors. Thus, it is a supervised method that generates new components that have maximum covariance with the output, thus allowing a smaller number of components needed compared to PCR. However the problem of interpretability of the new predictors still remains. There are some algorithms for calculating PLS, such as NIPALS and SIMPLS.
+% O modelo de regressão de mínimos parciais pode ser visto como uma junção das funcionalidades dos modelos de regressão linear, que buscam maximar a correlação dos preditores com saída, e os em componentes principais, que capturam as maiores variâncias nos preditores. Assim, é um método supervisionado que gera novas componentes que tenham máxima covariância com a saída, assim permitindo um número menor de componentes necessárias em relação ao PCR. Entretanto o problema da interpretabilidade dos novos preditores ainda persiste. Existem alguns algorítimos para o calculo do PLS, como o NIPALS e o SIMPLS.
 
 \subsection{Cross Validation}
 
-A validação cruzada consiste numa técnica para avaliar o modelo dentro conjunto de teste, geralmente levando em conta a flexibilidade do modelo e o erro quadrático médio. Em suma divide-se o conjunto em k grupos distintos de tamanhos semelhantes, esses grupos um é removido e passa ser o conjunto de validação, então se produz os modelos a partir das amostras restantes, e para verificar  eu funcionamento tenta-se prever o conjunto de validação. Então o grupo removido retorna ao conjunto de treino e o grupo seguinte é removido e se torna o conjunto de validação. Esse processo é repetido até que todos os grupos sejam utilizados como validadores.
+Cross-validation is a technique to evaluate the model within the test set, usually taking into account model flexibility and root mean square error. In short, the set is divided into k distinct groups of similar size, one of these groups is removed and becomes the validation set, then the models are produced from the remaining samples, and to check how well they work, the validation set is predicted. Then the removed group is returned to the training set, and the next group is removed and becomes the validation set. This process is repeated until all groups are used as validators.
 
-Essa estratégia serve muitas vezes para indicar quais modelos terão uma previsão melhor no conjunto de teste, visto que permite comparar os níveis de erro e variância gerado pelos modelos. Importante ressaltar que usar k muito pequeno (como apenas em dois grupos k = 2) ou muito grande (k = número de amostras) gerará problemas. No primeiro caso poderá um alto enviesamento dos modelos, visto que muitas amostras serão deixadas de fora do grupo de treino, e no segundo ocorrerá muita variância nos modelos pois os grupos utilizados no método são muito semelhantes. Portanto para compensar ambos os efeitos costuma-se usar k = 5 ou 10, visto que experimentalmente apresentam níveis aceitáveis de variância e enviesamento.
+% A validação cruzada consiste numa técnica para avaliar o modelo dentro conjunto de teste, geralmente levando em conta a flexibilidade do modelo e o erro quadrático médio. Em suma divide-se o conjunto em k grupos distintos de tamanhos semelhantes, esses grupos um é removido e passa ser o conjunto de validação, então se produz os modelos a partir das amostras restantes, e para verificar  eu funcionamento tenta-se prever o conjunto de validação. Então o grupo removido retorna ao conjunto de treino e o grupo seguinte é removido e se torna o conjunto de validação. Esse processo é repetido até que todos os grupos sejam utilizados como validadores.
+
+This strategy often serves to indicate which models will predict better on the test set, as it allows the levels of error and variance generated by the models to be compared. Importantly, using k too small (as in only two groups k = 2) or too large (k = number of samples) will create problems. In the first case there may be a high bias in the models, since many samples will be left out of the training group, and in the second case there will be too much variance in the models because the groups used in the method are very similar. Therefore, to compensate for both effects, it is usual to use $k = 5$ or $10$, since experimentally they present acceptable levels of variance and bias. On our experimets we use the both values for $k$, 5 and 10, keeping the best solution. 
+
+% Importante ressaltar que usar $k$ muito pequeno (como apenas em dois grupos $k=2$) ou muito grande ($k = $ número de amostras) gerará problemas. No primeiro caso poderá um alto enviesamento dos modelos, visto que muitas amostras serão deixadas de fora do grupo de treino, e no segundo ocorrerá muita variância nos modelos pois os grupos utilizados no método são muito semelhantes. Portanto para compensar ambos os efeitos costuma-se usar $k=5$ ou $10$, visto que experimentalmente apresentam níveis aceitáveis de variância e enviesamento.

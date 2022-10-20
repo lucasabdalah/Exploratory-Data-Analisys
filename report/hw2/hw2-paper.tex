@@ -28,7 +28,7 @@
 
 \begin{document}
 
-\title{Regression Analysis Applied to Breast Cancer Data: From Linear to Penalized Models}
+\title{Regression Analysis Applied to Solubility Data: From Ordinary to Penalized Models}
 
 \author{\IEEEauthorblockN{Brewton Morais}
 \IEEEauthorblockA{\textit{DETI} \\
@@ -46,16 +46,17 @@ Fortaleza, Brazil \\
 \maketitle
 
 \begin{abstract}
-Breast Cancer is one of the most aggressive cancer types and has a great impact in cancer mortality, mainly in women. This work analyzes tumor cells characteristics in order to provide an effective method to preprocess and reduce the dimension of the data, since the presence of several predictors may provide redundant information, what increases the cost of a Machine Learning-based techniques. In this paper, we present a framework based in Principal Component Analysis (PCA) and data normalization to clean the data and extract only the more relevant parameters, that can preserve original data characteristics and feed a predicting model to provide a final diagnosis.
+Chemical and physical properties may be exploited to predict molecular interactions of solubility for drugs investigation. On this work we take advantage on mathematical tools, such as linear regression model analysis to perform prediction for data with information related to the chemical structure of compounds to predict their solubility. Based on data preprocessing techniques a data reduction approach is presented for the model. Linear relationship observed for some predictors is summarized with PCA and correlation matrix computing, to assess predictors relationship. In addition, a brief analysis of linear regression models and comparison to the penalized models, such as Lasso and Ridge. Finally, an analysis of the prediction accuracy of the developed model was performed with cross-validation techniques assessed by error parameters such as root mean squared error (RMSE) and coefficient of determination $R^{2}$.
 
-% Abstract: 104 words
+% Abstract: 133 words
 % This document is a model and instructions for \LaTeX.
 % This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
 % or Math in Paper Title or Abstract.
 \end{abstract}
 
 \begin{IEEEkeywords}
-Breast Cancer, Dimensionality Reduction, Linear regression, Machine learning, Principal Component Analysis.
+Chemical solubility, Linear regression, Machine learning, Penalized models, Principal component analysis.
+
 \end{IEEEkeywords}
 
 \input{manuscript/intro.tex}
