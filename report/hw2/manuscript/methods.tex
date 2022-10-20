@@ -1,7 +1,7 @@
 \section{Methods}
 
 \subsection{Data Overview}
-For the development of the predictive models we use the Solubility data set~\footnote{\url{https://cran.r-project.org/web/packages/AppliedPredictiveModeling/}} provided by the Springer book 'Applied Predictive Modeling'~\cite{Kuhn2013} available as a built-in package in the R Project for Statistical Computing~\cite{Rproject2022}. 
+For the development of the predictive models, we use the Solubility data set~\footnote{\url{https://cran.r-project.org/web/packages/AppliedPredictiveModeling/}} provided by the Springer book 'Applied Predictive Modeling'~\cite{Kuhn2013} available as a built-in package in the R Project for Statistical Computing~\cite{Rproject2022}. 
 
 The data consist of 1267 observations (samples) of various chemical compounds, with the solubility of the compound as the output. While the predictors are divided into three groups, the first with 208 binary predictors referring to the presence of a specific chemical substructure, the second with 16 predictors counting chemical bonds and certain types of atoms, and the third with four continuous predictors with characteristics of the compounds, such as molecular mass. 
 
@@ -15,9 +15,9 @@ Scalars, vectors, matrices are represented by lower-case $(a, b, \dots)$, boldfa
 \subsection{Data Preprocessing}
 Continuos and binary predictors contribute in different ways to the construction of the model, to define the best approach for each one. 
 
-For continuous data, we assess data mean, variance and skewness, to verify the existence of a significant presence of a left or right bias. In order to mitigate scale distortion bewteen continuos predictors and others associated issues, we normalize the data before generate and inferences from the data. We choose the z-score normalization, to perform a centering and scaling of the data to have a fair comparaison of the histograms, correlation plots and further operators. 
+For continuous data, we assess data mean, variance and skewness, to verify the existence of a significant presence of a left or right bias. In order to mitigate scale distortion bewteen continuos predictors and others associated issues, we normalize the data before generating inferences from the data. We choose the z-score normalization, to perform a centering and scaling of the data to have a fair comparaison of the histograms, correlation plots and further operators. 
 
-For normal distributions, only the knowledge of two statistics is enough to describe the set: mean ($\mu$) and standard deviation ($\sigma$) of the samples, summarized as $\mathcal{N}(\mu, \sigma^2)$. The z-score, or standard score, is a technique that shift and rescale the data, to provide a simplified version of each predictor representation, centered on zero, i.e, zero-mean distribution, and unitary standard deviation. So for a normal population distribution, it is enough to describe as $\mathcal{N}(0, 1)$.
+For normal distributions, only the knowledge of two statistics is enough to describe the set: mean ($\mu$) and standard deviation ($\sigma$) of the samples, summarized as $\mathcal{N}(\mu, \sigma^2)$. The z-score, or standard score, is a technique that shift and rescale the data, providing a simplified version of each predictor representation, centered on zero, i.e, zero-mean distribution, and unitary standard deviation. So for a normal population distribution, it is enough to describe as $\mathcal{N}(0, 1)$.
 
 We compute the sample mean ($\Bar{x}$) for each predictor:
 \begin{equation}
@@ -34,9 +34,9 @@ Finally, from results of both equations~\ref{eq:mean} and \ref{eq:std}, we obtai
   z_i = \frac{x_i - \Bar{x}}{\sigma} \, .
 \end{equation}
 
-A model constructed from a non-normalized data set may present a biased outcomes, since the model is sensitive to variance. Moreover, in a non-normalized data, for large variance difference between the predictors, those with the greatest values misrepresent its relevance and distort the model, since it can be interpreted as delivering more relevant information, e.g, signal power/energy in digital signal processing field.
+A model constructed from a non-normalized data set may present a biased outcome, since the model is sensitive to variance. Moreover, in a non-normalized data, for large variance difference between the predictors, those with the greatest values misrepresent its relevance and distort the model, once it can be interpreted as delivering more relevant information, e.g, signal power/energy in digital signal processing field.
 
-From the normalization we may use the covariance matrix and principal component analysis (PCA) to identify the predictors and its linear combinations that actually contribute to the model, producing a correlation analysis. It aims to identify those that carry redundant information, and in some cases eliminate it from the assessment. It also support the identification of the best set of regression tools applied, because in case that too many predictors have non-linear or more complex relationship, more powerful tools may be applied due its capacity of dealing with such complicated problems. 
+From the normalization we may use the covariance matrix and principal component analysis (PCA) to identify the predictors and its linear combinations that actually contribute to the model, producing a correlation analysis. It aims to identify those that carry redundant information, and in some cases eliminate it from the assessment. It also supports the identification of the best set of regression tools applied, because in case that too many predictors have non-linear or more complex relationship, more powerful tools may be applied due their capacity of dealing with such complicated problems. 
 
 It was checked if there were any missing values, but it was found that all data is fully completed, which eliminates the need of any data compensation technique. 
 
@@ -66,7 +66,7 @@ Linear regression is a simple and useful tool for supervised learning. It consis
 {\bf y} \approx \beta_0 + \beta_1 {\bf x} \, . \label{eq:linear_regression}
 \end{equation}
 
-The model in Eq. \ref{eq:linear_regression} presents two constants, $\beta_0$ and $\beta_1$, which stands for intercept and slope, respectively. Hence, the main goal is to estimate both coefficients to estimate an correlation between ${\bf x}$ and ${\bf y}$.
+The model in Eq. \ref{eq:linear_regression} presents two constants, $\beta_0$ and $\beta_1$, which stand for intercept and slope, respectively. Hence, the main goal is to estimate both coefficients to estimate an correlation between ${\bf x}$ and ${\bf y}$.
 
 We use a set for training to fit our estimated parameters, $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$, to predict any sort of model based on linear correlation with a mean-zero random error term $\epsilon$, a catch-all variable to acumulate what the model misses, since in general its true relationship is not linear~\cite{James2013}.
 
