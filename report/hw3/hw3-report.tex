@@ -127,11 +127,31 @@ infer if using a linear model is the adequate way of resolving this problem. For
 if there are too much predictos with non-linear relationship with the final output, it makes no 
 sense to insist in linear prediction models.
 
-\subsection{Abbreviations and Acronyms}\label{AA}
-Define abbreviations and acronyms the first time they are used in the text, 
-even after they have been defined in the abstract. Abbreviations such as 
-IEEE, SI, MKS, CGS, ac, dc, and rms do not have to be defined. Do not use 
-abbreviations in the title or heads unless they are unavoidable.
+\subsection{Cross-Validation}
+
+Cross-validation consists in a validation technique used to validate the model with the
+test set, usually taking into account the model flexibility and the mean squared error (MSE).
+Shortly, it divides the data set into $k$ distinct subsets of size as equal as 
+possible. From these groups, one of them is put aside to be used as validation set,
+while the model is trained based on the remaining $k-1$ subsets. Once the model is trained,
+the first removed subset is used as validation as previously stated. Then, the removed 
+subset is restored to the principal set, and the following subset is put aside to 
+perform the same procedure until all of the $k$ subgroups are all used as validation set. 
+This approach improves the model capability of generalization, once it's trained with 
+all the data at dispose, it also makes the error estimation more robust.
+
+This strategy generally serves to indicate which models have a better prediction capability
+on the test set, since it enables the comparison between the error levels and the variance
+generated.
+
+It's important to state that if a $k$ is chosen such as it's too small, e.g, $k=2$ 
+(two subgroups) or too large ($k=$sample size), we are going to have, respectively, a 
+strongly biased model because we let a lot of data outside the training step, and a potential
+overfitting issue due the high model complexity, ocurring the model to have a high variance.
+Thus, to mitigate both of the effects, normally $k=5,10$ is employed, since they present
+an acceptable level of bias and variance.
+
+\section{Model validation performance}
 
 \subsection{Units}
 \begin{itemize}
