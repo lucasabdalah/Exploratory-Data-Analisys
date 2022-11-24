@@ -46,13 +46,20 @@ Fortaleza, Brazil \\
 \maketitle
 
 \begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
+An analysis of classification models was done for a set of data with informations related
+to the request and approvals for research and academic activities. Using MATLAB 2022a, 
+we trained different classification models, statistical and decision trees, such as 
+Logistic Regression, KNN, LDA, CART, etc, making use of their respective confusion 
+matrix as the results demonstrations. One of the goals these tests is to investigate if 
+there are linear relationship between the provided predictors of the data base, in 
+order to optimize the model that could be used by an university or a governamental 
+instituion. Finally, we perform a comparison of the results and of the decision making
+about which model we understand to be the most efficient to the problem.  
+
 \end{abstract}
 
 \begin{IEEEkeywords}
-breast cancer, diagnosis, machine learning, linear model, linear regression, cell biopsy
+classification model, logistic regression, grand application, KNN
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -63,30 +70,27 @@ breast cancer, diagnosis, machine learning, linear model, linear regression, cel
 
 \reviewMinor{This command is used for minor changes suggestion.}
 
-Breast Cancer is one of the most commom cancer type in women behind only of Skin Cancer. In Brazil, according to 
-the Instituto Nacional de Câncer (INCA) \reviewMinor{translate to English?}, approximately 59,700 women were diagnosed
-with Breast Cancer in 2019, with a mortality rate of 13.68 per 100,000 habitants. 
-Despite the fact that there are a limited amount of data worlwide, in some regions such as Western Europe and North America,
-breast cancer is the one with the highest incidence.
+Classification models are a class of mathematical models constantly used in problems of
+assimilating observations of certain events to certain categories that define the problem.
+Nowadays, these models are considered tools of fundamental importance in the construction 
+of Deep Learning and Machine Learning algorithms. To begin, it's important to evidence 
+the main existing difference between this new class of models and the class of 
+regression models which is the prediction of a qualitative variable instead of a quantitative
+one. This new class of tools present various practical applications, such as the 
+development of a detection spam filter for emails based on the sender and on the content
+of the message, the development of classification techniques of a cell belonging to tumors, 
+as beningn or malignant and on the development of a model of credit release for financing.
 
-Although the treatment for it is normally agressive, early-stage cancer detection may reduce the death rate in the long term \cite{b1}. 
-Some exams such as mammography and contrast-enhaced (CE) digital mammography are commonly used to do the diagnosis, 
-as well as the breast biopses aims to infer if the tumor is malignant or benign, requiring trained people. 
+In addition to these pure classification models applications, there are mixed applications 
+techniques that combine Data Mining techniques with some other types of models to perform
+a prediction. Some examples of models that use Data Mining techniques to improve their 
+results are addressed by Sidropoulos \reviewNormal{Add reference}, such as Web Mining/Search 
+tensor models and Brain Data Analysis. 
 
-With the purpose of improving Breast Cancer Diagnosis, the analysis of potential cancerous cells have been made,
-retrieving features such as texture, smoothness, radius size, etc. The study of these parameters can be crucial 
-to the early-stage breast cancer detection, as it will be investigated in this work. 
-
-Throughtout this paper, the relevance of such cell caracteristics will be analyzed by statitics metrics and data visualization tools 
-with the goal of fiding a correlation or a probability relationship to the final diagnosis. The final goal is to 
-build a probabilistic model capable of predicting the malignancy of tumor cells.
-
-Therefore this work focus on the search for linear relationship between the parameters 
-and the class of data, which it's refered as M for malignant and B for benign cells, wich can be 
-categorized as a binary classification problem. At first, it may be possible to use 
-Linear Regression techniques and Maximum Likelihood Estimator to achieve this goal, which will be 
-confirmed throughout the development of the study. 
-
+Meanwhile, in the work developed in this paper, some of the most used techniques in the
+development of classification models were approached, such as SVM, KNN and CART, to train and 
+test a funding model that will separate observations into one of two available groups:
+Positive Founding and Negative Founding.
 
 
 \section{Breast Cancer Dataset}
