@@ -107,15 +107,25 @@ separeted between continuous, such as the number of successes and failures passe
 "chief investigator", and categorical ones, such as the monetary value of the grant, 
 divided into 17 groups of increasing amounts, and the month of application.
 
-\section{Prepare Your Paper Before Styling}
-Before you begin to format your paper, first write and save the content as a 
-separate text file. Complete all content and organizational editing before 
-formatting. Please note sections \ref{AA}--\ref{SCM} below for more information on 
-proofreading, spelling and grammar.
+\subsection{Pre-processing}
 
-Keep your text and graphic files separate until after the text has been 
-formatted and styled. Do not number text heads---{\LaTeX} will do that 
-for you.
+Initially, the first step is verifying the data skewness, in case there is a strong 
+tendence to the left or to the right, an adequate transformation would be applied in order to 
+remove the skewness. The next step is to scale and center the data around the mean. It's 
+done so since different predictors can have different scales, and if they're not normalized,
+models sensitive to the variance would be affected negatively, making it biased to those
+predictors with the highest values. 
+
+Then, what we should do is to verify which predictors have actual importance to the model 
+construction, that is, which of them have a stronger say for the final prediction. We can 
+study this by analysing their correlation. Those with a correlation larger than 0.99, with
+zero variance or sparse, that is, that have lots of zero values as data, were removed.
+
+Then, the final approach is to verify the linearity of the predictors together with the output. 
+This step is essential, and the reason for this is, once we have analysed this aspect, we can
+infer if using a linear model is the adequate way of resolving this problem. For example, 
+if there are too much predictos with non-linear relationship with the final output, it makes no 
+sense to insist in linear prediction models.
 
 \subsection{Abbreviations and Acronyms}\label{AA}
 Define abbreviations and acronyms the first time they are used in the text, 
