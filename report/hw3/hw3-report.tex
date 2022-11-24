@@ -93,29 +93,19 @@ test a funding model that will separate observations into one of two available g
 Positive Founding and Negative Founding.
 
 
-\section{Breast Cancer Dataset}
+\section{Method}
 
-\subsection{Context and parameters}
+\subsection{Data set}
 
-The breast cancer is characterized when the cells in the women's breast start
-growing uncontrollaby, which forms tumors that can be either bening or malign. 
-
-The dataset contains cell parameters such as radius mean, texture mean, area mean, 
-smoothness and so on, which are normally the parameters altered by a malignant
-tumor. 
-It is composed by 32 columns and 539 rows, that is, 32 features 
-for 539 samples. There are 2 columns between the 32 that do not represent any information 
-concerning the cells, but the identification of the pacients and their final
-diagnosis as well. Therefore, the dataset contains two classes, Malignant (M) and Benign (B),
-characterizing a binary classification problem. 
-
-Although there are only two classes, the key challenge is to build a prediction
-model based on the weight of each feature on the final result, that is, the relevance
-on the final diagnosis. It's proposed a data investigation on the possible missing values as 
-well as a dimensionality reduction since there are too many columns, what would 
-make the model too complex and probably not able to generalize if all of these 
-features were to be considered for the model construction. 
-
+The data used for the construction of the predictive models consists of 8708 samples
+of different requests for funding from universities around the world, to finance research,
+with the outcome being the success or failure of the request. The data set contains samples
+from the years 2005 to 2008, with a total of 1882 predictors (independent variables). 
+6633 samples from 2005 to 2007 and 1552 from 2008 were used for model training, and the 
+remaining 518 samples from 2008 were used for testing the obtained model. Predictors can be 
+separeted between continuous, such as the number of successes and failures passed by the 
+"chief investigator", and categorical ones, such as the monetary value of the grant, 
+divided into 17 groups of increasing amounts, and the month of application.
 
 \section{Prepare Your Paper Before Styling}
 Before you begin to format your paper, first write and save the content as a 
