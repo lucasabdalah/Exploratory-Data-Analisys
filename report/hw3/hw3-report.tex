@@ -153,6 +153,23 @@ an acceptable level of bias and variance.
 
 \section{Model validation performance}
 
+One of the most used metrics to measure the performance a classification model is the
+Receiver Operating Characteristic curve (ROC) and the Area Under the Curve (AUC) \reviewNormal{correct initials?}.
+ The ROC curve is traced in a graphic with the positive ratio in the y-axis and the negative
+ratio in the x-axis, and each point of the curve is computed varying the classification
+limiar. Decreasing this limiar makes the model classify more items as positive, increasing
+the true positive and false positive. Increasing this limiar, causes the inverse
+effect.
+
+After calculating the ROC curve we can find the area under it. The area under the ROC curve
+represents how well the model divides the two classes, as close the AUC value is from 1, 
+better the model. However, this kind of analysis shouldn't be applied alone to validate
+ a model's performance, since there is an information loss in the construction of the 
+ graphic. Then, the dispersion table, which contains in its principal diagonal the number
+ of true positives and true negatives, and in its secondary diagnoal the number of 
+ false positives and false negatives, becomes an interesting analysis complement to the 
+ ROC curve.
+
 \subsection{Units}
 \begin{itemize}
 \item Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as ``3.5-inch disk drive''.
