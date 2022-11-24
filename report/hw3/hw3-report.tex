@@ -170,6 +170,54 @@ better the model. However, this kind of analysis shouldn't be applied alone to v
  false positives and false negatives, becomes an interesting analysis complement to the 
  ROC curve.
 
+ \section{Linear Methods}
+\subsection{Logistic Regression (LR)}
+It is statistical model used to determine the probability of an event. Therefora, its values 
+are probabilities, which belong to the $(0,1)$ interval. 
+The model is defined as:
+
+\begin{equation}
+   p(X) = \cfrac{e^{\beta_0 + \beta_1X}}{1+e^{\beta_0 + \beta_1X}} \hspace{0.15cm}, \hspace{0.35cm} 0\leq p(X) \leq 1 \label{eq1}
+\end{equation}
+
+This logistic model will aways produce a S-shaped curve, regardless of the value of $X$, 
+getting a relatively precise prediction. After some mathematical astuces, it's possible 
+to come up with the following equations that model the method.
+
+\begin{equation}
+    \cfrac{p(X)}{1-p(X)} = e^{\beta_0+\beta_1X} \label{eq2}
+\end{equation}
+
+\begin{equation}
+    \log \left(\cfrac{p(X)}{1-p(X)}\right) = \beta_0+\beta_1X \label{eq3}
+\end{equation}
+
+The right term of \eqref{eq2} is called Odds, then the right term of \eqref{eq3} is 
+called log-odds or logistic. The Odds ratio represents the effects of predictor X, on the
+likelihood that an event will happen.
+
+To adjust the model's parameters would be necessary to use
+the Maximum-Likelihood technique to perform an estimation of them. However, it's also possible
+to make use of the Least Squares for the adjust, as well as in the case of the 
+coefficients in a linear regression.
+
+\begin{table}[htbp]
+    \caption{LR Test}
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \cline{1-5}
+    \textbf{Positive}& 148 & 41 & 78.38\% & 21.7\% \\
+    \cline{1-5} 
+    \textbf{Negative} & 43 & 286 & 86.9\% & 13.1\% \\
+    \hline
+     & \textbf{Positive} & \textbf{Negative} & & & \\
+    \hline
+    \end{tabular}
+    \label{LR Test}
+    \end{center}
+\end{table}
+
 \subsection{Units}
 \begin{itemize}
 \item Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as ``3.5-inch disk drive''.
