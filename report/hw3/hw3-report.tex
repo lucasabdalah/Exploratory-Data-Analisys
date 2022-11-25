@@ -201,30 +201,94 @@ the Maximum-Likelihood technique to perform an estimation of them. However, it's
 to make use of the Least Squares for the adjust, as well as in the case of the 
 coefficients in a linear regression.
 
-\begin{table}[htbp]
-    \caption{LR Test}
-    \begin{center}
-    \begin{tabular}{|c|c|c|c|c|}
-    \hline
-    \cline{1-5}
-    \textbf{Positive}& 148 & 41 & 78.38\% & 21.7\% \\
-    \cline{1-5} 
-    \textbf{Negative} & 43 & 286 & 86.9\% & 13.1\% \\
-    \hline
-     & \textbf{Positive} & \textbf{Negative} & & & \\
-    \hline
-    \end{tabular}
-    \label{LR Test}
-    \end{center}
-\end{table}
+\reviewUrgent{Put Table 1 here}
 
-\subsection{Units}
+% \begin{table}[htbp]
+%     \caption{LR Test}
+%     \begin{center}
+%     \begin{tabular}{|c|c|c|c|c|}
+%     \hline
+%     \cline{1-5}
+%     \textbf{Positive}& 148 & 41 & 78.38\% & 21.7\% \\
+%     \cline{1-5} 
+%     \textbf{Negative} & 43 & 286 & 86.9\% & 13.1\% \\
+%     \hline
+%      & \textbf{Positive} & \textbf{Negative} & & & \\
+%     \hline
+%     \end{tabular}
+%     \label{LR Test}
+%     \end{center}
+% \end{table}
+
+\subsection{Linear Discriminant Analysis}
+
+Instead of directly estimating $P(Y|X)$, a model with the following characteristics will 
+be developed:
+
 \begin{itemize}
-\item Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as ``3.5-inch disk drive''.
-\item Avoid combining SI and CGS units, such as current in amperes and magnetic field in oersteds. This often leads to confusion because equations do not balance dimensionally. If you must use mixed units, clearly state the units for each quantity that you use in an equation.
-\item Do not mix complete spellings and abbreviations of units: ``Wb/m\textsuperscript{2}'' or ``webers per square meter'', not ``webers/m\textsuperscript{2}''. Spell out units when they appear in text: ``. . . a few henries'', not ``. . . a few H''.
-\item Use a zero before decimal points: ``0.25'', not ``.25''. Use ``cm\textsuperscript{3}'', not ``cc''.)
+    \item Modeling the distribution of predictors of X separately in each class Y.
+    \item Baye's Theorem to estimate $P(Y = K|X = x)$.
+    \item Normal distribution to describe each class.
 \end{itemize}
+
+Following from these informations, we initiate the model's development directly from the 
+Baye's Theorem:
+
+\begin{equation}
+    P(Y=k|X=x) = p_k(X) \label{eq4}
+\end{equation}
+
+\begin{equation}
+    p_k(X) = \cfrac{P(X=x|Y=k)P(Y = k)}{P(X=x)} \label{eq5}
+\end{equation}
+
+\begin{equation}
+    p_k(X) = \cfrac{\pi_k f_k(x)}{\sum^{K}_{l=1}\pi_lf_l(x)} \label{eq6}
+\end{equation}
+
+Where $f_k(x)$ represents the probability density function (pdf) of the r.a X of 
+an observation belonging to class K. Thus, instead of directly computing $p_k(X)$ it's 
+possible to simply estimate $\pi_k(X)$ and $f_k(X)$. Then, assuming that the number of 
+predictors is unitary, we can make some affirmations about the form of $f_k(x)$ in order
+to move on with the LDA method:
+
+\begin{equation}
+    f_k(x) = \cfrac{1}{\sqrt{2\pi\sigma^2_k}}e^{\cfrac{-(x-\mu_k)^2}{2\sigma^2_k}} \label{eq7}
+\end{equation}
+
+Besides, we assume $\sigma_1^2=...=\sigma_k^2$. Therefore, it's possible to write $p_k(X)$ 
+as the following:
+
+\begin{equation}
+    p_k(X) = \cfrac{\pi_k \cfrac{1}{\sqrt{2\pi\sigma^2_k}}e^{\cfrac{-(x-\mu_k)^2}{2\sigma^2_k}}}{\sum^K_{l=1}\cfrac{1}{\sqrt{2\pi\sigma^2_l}}e^{\cfrac{-(x-\mu_l)^2}{2\sigma^2_l}}} \label{eq8}
+\end{equation}
+
+After some algebraic manipulations, it's possible to conclude that classifying one
+observation to a given class is equivalent to classify one observation to a given class 
+such that the the linear discriminant function $\sigma_k(x)$ is larger:
+
+\begin{equation}
+    \sigma_x = x\cfrac{\mu_x}{\sigma^2} - \cfrac{u_k^2}{2\sigma^2} + \log(\pi_k) \label{eq9}
+\end{equation}
+
+However, in practical situations, it's not always possible to know the parameter's values,
+then LDA approximates the Bayes classifier by the following expressions:
+
+\begin{equation}
+    \hat{\mu_k} = \frac{1}{n_k} \sum^K_{i = k} x_i \label{eq10}
+\end{equation}
+
+\begin{equation}
+    \hat{\sigma^2} = \frac{1}{n_k-K} \sum^K_{i = k} \sum^K_{i = k} (x_i-\hat{\mu_k})^2 \label{eq11}
+\end{equation}
+
+\begin{equation}
+    \pi_k = \frac{n_k}{n}\label{eq10}
+\end{equation}
+
+
+\reviewUrgent{Put Table 2 here}
+
 
 \subsection{Equations}
 Number equations consecutively. To make your 
