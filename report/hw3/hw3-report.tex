@@ -279,15 +279,52 @@ then LDA approximates the Bayes classifier by the following expressions:
 \end{equation}
 
 \begin{equation}
-    \hat{\sigma^2} = \frac{1}{n_k-K} \sum^K_{i = k} \sum^K_{i = k} (x_i-\hat{\mu_k})^2 \label{eq11}
+    \hat{\sigma^2} = \frac{1}{n-K} \sum^K_{i = k} \sum^K_{i = k} (x_i-\hat{\mu_k})^2 \label{eq11}
 \end{equation}
 
 \begin{equation}
-    \pi_k = \frac{n_k}{n}\label{eq10}
+    \pi_k = \frac{n_k}{n}\label{eq12}
 \end{equation}
 
 
 \reviewUrgent{Put Table 2 here}
+
+
+\section{Non-Linear Methods}
+
+\subsection{Quadratic Discriminant Analysis (QDA)}
+
+The QDA method is a non-linear variant of the LDA. The main difference between QDA and LDA
+lies in the fact that the covariance matrix of each class is different onr from another:
+
+\begin{equation}
+    X \sim  \mathcal{N}(u_k, \textstyle \sum_k)\label{eq13}
+\end{equation}
+
+The discriminant function for this method is, after some algebraic astuces:
+
+\begin{equation}
+    \sigma_k(x) = -\frac{1}{2}(x-\mu_k)^T\sum^{-1}_k(x-\mu_k) - \frac{1}{2}\log \lvert\sum_k\rvert +\log(\pi_k) \label{eq14}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+    \sigma_k(x) = {} 
+    & -\frac{1}{2}x^T\sum^{-1}_kx + x^T\sum^{-1}_k\mu_k -  \frac{1}{2}\mu_k^T\sum^{-1}_k\mu_k - \\ 
+    & - \frac{1}{2}\log \lvert\sum_k\rvert +\log(\pi_k) \label{eq15}
+\end{aligned}
+\end{equation}
+
+Thus, the QDA may be summarized as a way of computing $\sum_k$, $\mu_k$ and $\pi_k$ 
+in order to use the discriminant equation in the classification of a X observation into a class
+in which the discriminant has the larger absolute value.  
+
+Therefore, the QDA method is mainly recommended when there is a sufficiently large data set
+so the statements about the variance don't be a need or when it is not possible to 
+sustain the statement abour the unicity of the covariance matrix. Hence, differently 
+of the LDA method, the decision region of QDA is described by a non-linear curve. 
+
+
 
 
 \subsection{Equations}
