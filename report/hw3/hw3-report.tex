@@ -381,6 +381,21 @@ high variance. Meanwhile, for a large K, the exact opposite is true.
 
 \reviewUrgent{Add table 4}
 
+
+\subsection{Support Vector Machine (SVM)}
+
+In its simplest form, SVM separates points of two different classes using a single
+hyperplane with the Statistical Learning Technique, both developed by Vapnik (1995) and (1998) \reviewUrgent{add reference}.
+In the more complex versions, an hyperplane is built in $\mathbb{R}^n$, for a $n>2$, for 
+the class split, the increase of $n$ leaves the problem with a non-linear solution. In general,
+it's used the expression in \eqref{eq19} to define the decision boundary, i.e, the hyperplane
+for the separation of classes in $\mathbb{R}^2$.
+
+\begin{equation}
+    D(u)=\beta_0 + \sum_{j=1}^P \beta_j\mu_j = \beta_0+\sum_{i = 1}^ny_i\alpha_ix_i'u, \hspace{0.5cm} \alpha_i \geq 0 \label{eq19}
+\end{equation}
+
+\reviewUrgent{Add table 5}
 % \subsection{Equations}
 % Number equations consecutively. To make your 
 % equations more compact, you may use the solidus (~/~), the exp function, or 
