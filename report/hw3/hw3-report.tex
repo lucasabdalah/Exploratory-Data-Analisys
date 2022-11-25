@@ -30,12 +30,6 @@
 Fortaleza, Brazil \\
 \href{mailto:brewtonlmorais@gmail.com}{brewtonlmorais@gmail.com}}
 \and
-\IEEEauthorblockN{Cléber Lucas }
-\IEEEauthorblockA{\textit{DETI} \\
-\textit{Universidade Federal do Ceará}\\
-Fortaleza, Brazil \\
-\href{mailto:seuemail@email.com}{seuemail@email.com} \reviewUrgent{Update}}
-\and
 \IEEEauthorblockN{Lucas Abdalah}
 \IEEEauthorblockA{\textit{DETI} \\
 \textit{Universidade Federal do Ceará}\\
@@ -59,7 +53,7 @@ about which model we understand to be the most efficient to the problem.
 \end{abstract}
 
 \begin{IEEEkeywords}
-classification model, logistic regression, grand application, KNN
+classification model, logistic regression, grand application, KNN.
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -396,6 +390,91 @@ for the separation of classes in $\mathbb{R}^2$.
 \end{equation}
 
 \reviewUrgent{Add table 5}
+
+\subsection{Decision Tree}
+
+This method is quite robust and it comes from a simple principle: divide the approach
+into levels and attributes to build a cost function. To facilitate the visualization,
+it's interesing to use a binary tree. In general, the approach is given by decision levels,
+and for each level an attribute is chosen such that it better splits a data set 
+according to the class.
+
+\reviewUrgent{Add figure 1}
+
+For each new chosen attribute, new branches are created for the values present in the list
+of all possible attributes values. The way this is implemented depends on the algorithm
+used. In our work, we opted for the CART algorithm. The attributes choice in this model
+is made based on the Gini Criterion, which deals with node impurity, defined in \reviewUrgent{Add Reference here}
+by Breiman (1984) as:
+
+\begin{equation}
+    \sum_{j \neq i} p(i|t)p(j|t) \label{eq20}
+\end{equation}
+
+In short, we can assume that the criterion associates an object randomly selected from a 
+node to the class $i$ with probability $p(i|t)$. Meanwhile, $p(j|t)$ refers to the 
+estimated error probability that the item belongs to class $j$, such that the $p(j|t)$
+is the Gini Indice.
+
+The Gini Criterion works with one class at a time, aiming to separate the more frequent 
+class objects from the remaining objects in each test. 
+
+The well detailed explanation it's really important, since one of the factors that may 
+influence the precision and the time consumed to classify is the number of nodes present.
+Look at the tables (6) and (7) \reviewNormal{cite tables}, there are represented the results
+with trees of 10 and 100 nodes, respectively. The number of nodes didn't have much influence
+in the confusion matrix.
+
+\reviewUrgent{Add table 6}
+
+\reviewUrgent{Add table 7}
+
+\section{Results and Discussion}
+
+\subsection{Training results}
+
+During the training phase of all the models proposed, we applied the cross-validation 
+with $k=10$ subgroups, allowing protection against overfitting. To verify the results
+on the training set, we look at figure (2) and table (8). From the figure, we can 
+conclude that non-linear methods, such as SVM and the Decision Trees with 100 nodes, 
+have better performance when compared to simpler methods, such as Decision Trees with 10 
+nodes and Linear Methods.
+
+However, this pattern does not hold on the test set, since the linear models obtained 
+a quite good generalization capacity, making them as efficient as the non-linear models.
+
+\subsection{Conclusion}
+
+Among the test results obtained, there were no relevant differences between the results 
+of the models, with an exception of KNN, which had the worst result, but still, not bad. 
+A probable cause of this performance of KNN, it's that there are probably a data skewness, 
+since the "nature" of KNN, will preferentially classify the data located at the side 
+containing more elements, the evidence to it is in the table (4), since there is a 
+good classification performance in one of the classes, what suggests that this class 
+is more numerous, distorcing the remaining class classification.
+
+This similarity on the results between linear and non-linear methods, means that 
+the classes "success" and "failure" are linearly or approximately linearly separable. 
+Therefore, it favors the choice of simplest models of less computational cost. 
+According to the generated test, the best model was the Quadratic SVM. On the other hand,
+that performance was only superior in one hit in comparison with the LDA model. The latter
+can be trained with a lot less time and generate equivalent results. 
+
+Like KNN, other models had more considerable errors in one of the classes. The Logistic
+Regression had a correct rate smaller in the class "success" than in the "failure" class.
+Meanwhile, in the decision trees algorithms, the situation is inverted.  The algorithms 
+presenting a better trade-off in the class classification were the LDA and the 
+Quadratic SVM, with a difference around two percentual points between the correct 
+classification rates.
+
+Having raised these considerations, we conclude that the model with the best
+trade-off is the LDA, as its results with respect to corrected classified rates and 
+time of training are better than the results of other traditional methods. Its 
+corrected classified rate was not discrepant between classes, besides being equiparable 
+to the non-linear method with the best performance on the test set. The only caution would 
+be if it was necessary to often remodel the methods as more data were to be added.
+To this specific situation, the Decision Tree with 10 nodes would be recommended, in order to be 
+more agile in the training phase with a large data set. 
 % \subsection{Equations}
 % Number equations consecutively. To make your 
 % equations more compact, you may use the solidus (~/~), the exp function, or 
