@@ -83,10 +83,13 @@ tensor models and Brain Data Analysis.
 
 Meanwhile, in the work developed in this paper, some of the most used routines in the
 development of classification models were approached, such as Support Vector Machine (SVM),
-K-Neires Neighbors (KNN) and Classification and Regression Tree (CART), to train and 
+K-Neirest Neighbors (KNN) and Classification and Regression Tree (CART), to train and 
 test a funding model that will separate observations into one of two available groups:
 Positive Founding and Negative Founding.
 
+KNN (\ref{KNN}) uses the concept of proximity or distance to make 
+classifications of an individual data point, based on the other points surrounding it. Simply,
+we assume that data points close to one another up until some threshold belong to the same class.
 SVM (\ref{SVM}) is a set of supervised learning used for classification. One of its
 advantages is its efficience in high dimensional spaces, even when the number of 
 predictors is greater than the number of samples. However, unlike Logistic Regression,
@@ -96,7 +99,10 @@ works is by efficiently learning decision rules based on the data set, that will
 predict the final output as being of a class, or another. It's important to state 
 that this method is quite efficient with $N>2$ classes. Intuitevely, it simply checks 
 some conditions one after another, which are the decision rules, and link the response of those 
-conditions to a certain class at the final step.  
+conditions to a certain class at the final step. One good advantage of this method is that it 
+doesn't require much data pre-processing, so it's not necessary to create dummy variables or 
+to normalize the data.  
+
 
 \section{Method}
 
@@ -330,7 +336,7 @@ sustain the statement abour the unicity of the covariance matrix. Hence, differe
 of the LDA method, the decision region of QDA is described by a non-linear curve. 
 
 \subsection{K-Nearest Neighbors (KNN)}
-
+\label{KNN}
 Generally in practice, informations about the conditional distribution of Y given X 
 are not available. That being the case, the Baye's classification method works only as 
 a comparison tool to other more easily applicable practices. From this need of developing 
