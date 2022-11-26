@@ -77,15 +77,26 @@ as beningn or malignant and on the development of a model of credit release for 
 
 In addition to these pure classification models applications, there are mixed applications 
 techniques that combine Data Mining techniques with some other types of models to perform
-a prediction. Some examples of models that use Data Mining techniques to improve their 
+a prediction. Some examples of models that use Data Mining practices to improve their 
 results are addressed by Sidropoulos \reviewNormal{Add reference}, such as Web Mining/Search 
 tensor models and Brain Data Analysis. 
 
-Meanwhile, in the work developed in this paper, some of the most used techniques in the
-development of classification models were approached, such as SVM, KNN and CART, to train and 
+Meanwhile, in the work developed in this paper, some of the most used routines in the
+development of classification models were approached, such as Support Vector Machine (SVM),
+K-Neires Neighbors (KNN) and Classification and Regression Tree (CART), to train and 
 test a funding model that will separate observations into one of two available groups:
 Positive Founding and Negative Founding.
 
+SVM (\ref{SVM}) is a set of supervised learning used for classification. One of its
+advantages is its efficience in high dimensional spaces, even when the number of 
+predictors is greater than the number of samples. However, unlike Logistic Regression,
+it doesn't directly provides probability values. Decision Trees (\ref{Decision Tree})
+are a non-parametric method for classification and regression. In short, the way it 
+works is by efficiently learning decision rules based on the data set, that will
+predict the final output as being of a class, or another. It's important to state 
+that this method is quite efficient with $N>2$ classes. Intuitevely, it simply checks 
+some conditions one after another, which are the decision rules, and link the response of those 
+conditions to a certain class at the final step.  
 
 \section{Method}
 
@@ -377,7 +388,7 @@ high variance. Meanwhile, for a large K, the exact opposite is true.
 
 
 \subsection{Support Vector Machine (SVM)}
-
+\label{SVM}
 In its simplest form, SVM separates points of two different classes using a single
 hyperplane with the Statistical Learning Technique, both developed by Vapnik (1995) and (1998) \reviewUrgent{add reference}.
 In the more complex versions, an hyperplane is built in $\mathbb{R}^n$, for a $n>2$, for 
@@ -392,7 +403,7 @@ for the separation of classes in $\mathbb{R}^2$.
 \reviewUrgent{Add table 5}
 
 \subsection{Decision Tree}
-
+\label{Decision Tree}
 This method is quite robust and it comes from a simple principle: divide the approach
 into levels and attributes to build a cost function. To facilitate the visualization,
 it's interesing to use a binary tree. In general, the approach is given by decision levels,
