@@ -24,7 +24,6 @@ for p = 1:length(data.predictors)
     end      
 end
 
-
 pos(count) = p + 1;
 
 %% Split Train and Test Data  
@@ -32,9 +31,14 @@ train_set = data.Training(:,pos');
 test_set = data.Testing(:,pos'); 
  
 %% Classifiers
+script_LR
+export_fig(default, summary.LR.h,['figures/', summary.LR.filename])
+
 script_LDA
 export_fig(default, summary.LDA.h,['figures/', summary.LDA.filename])
-genLog(default, summary.LDA)
+
+genLog(default, summary.LR, summary.LDA);
+
 
 %% Auxiliar functions
 function export_fig(Activate, h, filename)
@@ -48,13 +52,21 @@ function export_fig(Activate, h, filename)
 end
 
 function verbose_save(filename)
-  fprintf('Saving Results for:\n\t %s \n', filename);
+  fprintf('Saving Results for:\n\t %s \n\n', filename);
 end
 
-function genLog(Activate, input)
+function genLog(Activate, varargin)
   if Activate
-    log = [input.filename, '\n', 'Confusion Matrix:\n', ...
-    sprintf('%d %d\n', input.CFmat'), '\n', 'Accuracy:', sprintf('%1.3e', input.ACC)];
-    log_write(log);
+    if isempty(varargin)
+      log_write('Performed')
+    else
+      for i = 1:1:length(varargin)
+        input = varargin{i};
+        log = [input.filename, '\n', ...
+        'Confusion Matrix:\n', sprintf('%d %d\n', input.CFmat'), '\n', ...
+        'Accuracy:', sprintf('%1.3e', input.ACC), '\n\n'];
+        log_write(log);
+      end
+    end
   end
 end
