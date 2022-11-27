@@ -1,0 +1,61 @@
+--------------------
+27-Nov-2022 12:29:43
+--------------------
+LR_confusion
+Confusion Matrix:
+148 41
+43 286
+Accuracy:8.378e-01
+Train Time: 1.293e+01
+Test Time: 1.745e-02
+.......
+ LDA_confusion
+Confusion Matrix:
+156 33
+45 284
+Accuracy:8.494e-01
+Train Time: 2.115e+00
+Test Time: 1.624e-02
+.......
+ KNN_1_confusion
+Confusion Matrix:
+100 89
+76 253
+Accuracy:6.815e-01
+Train Time: 9.656e+00
+Test Time: 3.695e-01
+.......
+ KNN_50_confusion
+Confusion Matrix:
+136 53
+47 282
+Accuracy:8.069e-01
+Train Time: 1.642e+01
+Test Time: 6.525e-01
+.......
+ SVM_confusion
+Confusion Matrix:
+157 32
+44 285
+Accuracy:8.533e-01
+Train Time: 6.165e+01
+Test Time: 5.932e-02
+.......
+ TREE_10_confusion
+Confusion Matrix:
+167 22
+65 264
+Accuracy:8.320e-01
+Train Time: 8.366e-01
+Test Time: 1.308e-02
+.......
+ TREE_100_confusion
+Confusion Matrix:
+164 25
+66 263
+Accuracy:8.243e-01
+Train Time: 1.805e+00
+Test Time: 1.281e-02
+.......
+
+
