@@ -1,20 +1,37 @@
+%% [TIP7077 - INTELIGENCIA COMPUTACIONAL APLICADA]
+% Author: Lucas Abdalah and Brewton Morais
+% Homework 3: Data Classication 
+% script: script_LDA.m
+% 2022/11/26 - v1
+% Attention: this script uses functions present in:
+% https://github.com/lucasabdalah/basic-functions
+
+summary.LDA.filename = 'LDA_confusion';
 
 %% Train
+t = tic;
 [LDA, vLDA] = LDA_CV10(train_set); 
+summary.LDA.trainTime = toc(t);
 
 %% Test
+t = tic;
 test_LDA = LDA.predictFcn(test_set);
+summary.LDA.testTime = toc(t);
 
 %% Confusion Matrix
 response_testing = cellstr(data.true_testing);
 [cm_lda,go_lda] = confusionmat(response_testing,test_LDA);
 
 %% Plot Confusion Matrix and export
-figure
+summary.LDA.h = figure;
 cm_lda_plot = confusionchart(cm_lda,go_lda);
 cm_lda_plot.RowSummary = 'row-normalized';
-% saveas(gcf,'test_LDA.pdf')
+% savefig_tight(summary.LDA.h, ['figures/', summary.LDA.filename], 'both');
 
-%% Text summary and export
-CFmat = flip(flip(cm_lda),2);
-ef_LDA = (cm_lda(1,1) + cm_lda(2,2))/518; 
+%% Confusion Matrix and Accuracy summary to Text
+summary.LDA.CFmat = flip(flip(cm_lda),2);
+summary.LDA.ACC = (cm_lda(1,1) + cm_lda(2,2)) /size(data.Testing,1);
+
+log = [summary.LDA.filename, '\n', 'Confusion Matrix:\n', ...
+  sprintf('%d %d\n', summary.LDA.CFmat'), '\n', 'Accuracy:', sprintf('%1.3e', summary.LDA.ACC)];
+log_write(log);
