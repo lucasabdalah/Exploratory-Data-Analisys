@@ -381,7 +381,7 @@ classdef classifiers
         end
 
 
-        function [trainedClassifier, validationAccuracy] = KNN_50_spearman(trainingData)
+        function [trainedClassifier, validationAccuracy] = KNN_50(trainingData)
             % [trainedClassifier, validationAccuracy] = trainClassifier(trainingData)
             % returns a trained classifier and its accuracy. This code recreates the
             % classification model trained in Classification Learner app. Use the
@@ -474,7 +474,7 @@ classdef classifiers
             validationAccuracy = 1 - kfoldLoss(partitionedModel, 'LossFun', 'ClassifError');
         end            
 
-        function [trainedClassifier, validationAccuracy] = SVM_Q(trainingData)
+        function [trainedClassifier, validationAccuracy] = SVM(trainingData)
             % [trainedClassifier, validationAccuracy] = trainClassifier(trainingData)
             % returns a trained classifier and its accuracy. This code recreates the
             % classification model trained in Classification Learner app. Use the
