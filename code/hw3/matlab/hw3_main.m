@@ -59,6 +59,11 @@ genLog(default, summary.LR, summary.LDA, summary.KNN_1, summary.KNN_50, ...
   summary.SVM, summary.TREE_10, summary.TREE_100);
 
 
+%% ROC
+script_ROC
+export_fig(default, summary.ROC.h,['figures/', summary.ROC.filename])
+
+
 %% Auxiliar functions
 function export_fig(Activate, h, filename)
   if Activate
