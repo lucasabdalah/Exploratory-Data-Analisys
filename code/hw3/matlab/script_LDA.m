@@ -20,18 +20,22 @@ summary.LDA.testTime = toc(t);
 
 %% Confusion Matrix
 response_testing = cellstr(data.true_testing);
-[cm_lda,go_lda] = confusionmat(response_testing,test_LDA);
+[cm_LDA,go_LDA] = confusionmat(response_testing,test_LDA);
 
 %% Plot Confusion Matrix and export
 summary.LDA.h = figure;
-cm_lda_plot = confusionchart(cm_lda,go_lda);
-cm_lda_plot.RowSummary = 'row-normalized';
+cm_LDA_plot = confusionchart(cm_LDA,go_LDA);
+cm_LDA_plot.RowSummary = 'row-normalized';
 % savefig_tight(summary.LDA.h, ['figures/', summary.LDA.filename], 'both');
 
 %% Confusion Matrix and Accuracy summary to Text
-summary.LDA.CFmat = flip(flip(cm_lda),2);
-summary.LDA.ACC = (cm_lda(1,1) + cm_lda(2,2)) /size(data.Testing,1);
+summary.LDA.CFmat = flip(flip(cm_LDA),2);
+summary.LDA.ACC = (cm_LDA(1,1) + cm_LDA(2,2)) /size(data.Testing,1);
 
-log = [summary.LDA.filename, '\n', 'Confusion Matrix:\n', ...
-  sprintf('%d %d\n', summary.LDA.CFmat'), '\n', 'Accuracy:', sprintf('%1.3e', summary.LDA.ACC)];
+log = ['-', summary.LDA.filename, '\n\n', ...
+  'Confusion Matrix:\n', sprintf('\t %d %d\n', summary.LDA.CFmat'), '\n', ...
+  'Accuracy: ', sprintf('%1.3e', summary.LDA.ACC), '\n', ...
+  'Train Time: ', sprintf('%1.3e', summary.LDA.trainTime), '\n', ...
+  'Test Time: ', sprintf('%1.3e', summary.LDA.testTime)];
+
 log_write(log);
