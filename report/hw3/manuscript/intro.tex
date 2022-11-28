@@ -1,0 +1,34 @@
+\section{Introduction}
+Classification models are a class of mathematical models constantly used in problems of
+assimilating observations of certain events to certain categories that define the problem.
+Nowadays, these models are considered tools of fundamental importance in the construction 
+of Deep Learning and Machine Learning algorithm~\cite{Kuhn2013, Hastie2009}. To begin, it is important to evidence 
+the main existing difference between this new class of models and the class of 
+regression models which is the prediction of a qualitative variable instead of a quantitative
+one. This new class of tools present various practical applications, such as the 
+development of a detection spam filter for emails based on the sender and on the content
+of the message, the development of classification techniques of a cell belonging to tumors, 
+as beningn or malignant and on the development of a model of credit release for financing~\cite{James2013}.
+
+In addition to these pure classification models applications, there are mixed applications 
+techniques that combine Data Mining techniques with some other types of models to perform
+a prediction. Some examples of models that use Data Mining practices to improve their 
+results are addressed in~\cite{Sidiropoulos2016}, such as Web Mining/Search 
+tensor models and Brain Data Analysis. 
+
+Meanwhile, in the work developed in this paper, some of the most used routines in the
+development of classification models were approached, such as Support Vector Machine (SVM),
+K-Neirest Neighbors (KNN)~\cite{Muniz2010} and Classification and Regression Tree (CART), to train and 
+test a funding model that will separate observations into one of two available groups:
+Positive Founding and Negative Founding.
+
+KNN uses the concept of proximity or distance to make classifications of an individual 
+data point, based on the other points surrounding it. Simply, we assume that data 
+points close to one another up until some threshold belong to the same class.
+SVM is a set of supervised learning used for classification. One of its
+advantages is its efficience in high dimensional spaces, even when the number of 
+predictors is greater than the number of samples. However, unlike Logistic Regression,
+it doesn't directly provides probability values. Decision Trees are a non-parametric
+method for classification and regression. In short, the way it works is by efficiently
+learning decision rules based on the data set, that will predict its class.
+
